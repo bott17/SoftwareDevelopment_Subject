@@ -3,16 +3,26 @@ package gui;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
+
 import java.awt.Color;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 import java.awt.SystemColor;
+
 import javax.swing.JToggleButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PanelBotones extends JPanel {
 	private JTextField txtState;
+	JToggleButton tglbtnOnOff;
+	JButton btnSpeed;
+	
+	
 
 	/**
 	 * Create the panel.
@@ -20,23 +30,32 @@ public class PanelBotones extends JPanel {
 	public PanelBotones() {
 		setLayout(null);
 		
+		
 		JPanel panel = new JPanel();
 		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel.setBounds(10, 161, 430, 128);
 		add(panel);
 		panel.setLayout(null);
 		
-		JButton btnOnOff = new JButton("Encender");
-		btnOnOff.setBounds(88, 48, 112, 30);
-		panel.add(btnOnOff);
-		
-		JButton btnSpeed = new JButton("Acelerar");
+		btnSpeed = new JButton("Acelerar");
+		btnSpeed.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BotonAcelerarActionPerformed(e);
+			}
+		});
 		btnSpeed.setBounds(210, 48, 112, 30);
 		panel.add(btnSpeed);
 		
-		JToggleButton tglbtnNewToggleButton = new JToggleButton("New toggle button");
-		tglbtnNewToggleButton.setBounds(21, 94, 121, 23);
-		panel.add(tglbtnNewToggleButton);
+		tglbtnOnOff = new JToggleButton("Encender");
+		tglbtnOnOff.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BotonEncenderActionPerformed(e);
+			}
+		});
+		tglbtnOnOff.setBackground(SystemColor.inactiveCaption);
+		tglbtnOnOff.setBounds(63, 48, 137, 30);
+		tglbtnOnOff.setForeground(Color.RED);
+		panel.add(tglbtnOnOff);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -54,6 +73,41 @@ public class PanelBotones extends JPanel {
 		panel_1.add(txtState);
 		txtState.setColumns(10);
 
+	}
+	
+	synchronized private void BotonAcelerarActionPerformed (java.awt.event.ActionEvent evt){
+		
+		JButton button = (JButton)evt.getSource();
+		// If engine is on
+		if(tglbtnOnOff.isSelected()){
+			
+			txtState.setText("ACELERANDO");
+			
+			// TODO
+			//aumentar velocidad
+		}
+		
+	}
+	
+	synchronized private void BotonEncenderActionPerformed(java.awt.event.ActionEvent evt){
+		
+		JToggleButton button = (JToggleButton)evt.getSource();
+		
+		if(button.isSelected()){
+			button.setForeground(Color.BLUE);
+			button.setBackground(Color.GRAY);
+			button.setText("Apagar");
+			
+			txtState.setText("Encendido");
+		}
+		else if(!button.isSelected()){
+			button.setForeground(Color.RED);
+			button.setBackground(Color.MAGENTA);
+			button.setText("Encender");
+			
+			
+			txtState.setText("Apagado");
+		}
 	}
 	
 }
