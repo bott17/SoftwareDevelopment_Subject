@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
@@ -14,10 +15,11 @@ import java.awt.Font;
 import java.awt.SystemColor;
 
 import javax.swing.JToggleButton;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelBotones extends JPanel {
+public class PanelBotones extends JFrame {
 	private JTextField txtState;
 	JToggleButton tglbtnOnOff;
 	JButton btnSpeed;
@@ -53,7 +55,7 @@ public class PanelBotones extends JPanel {
 			}
 		});
 		tglbtnOnOff.setBackground(SystemColor.inactiveCaption);
-		tglbtnOnOff.setBounds(63, 48, 137, 30);
+		tglbtnOnOff.setBounds(76, 48, 124, 30);
 		tglbtnOnOff.setForeground(Color.RED);
 		panel.add(tglbtnOnOff);
 		
@@ -93,6 +95,7 @@ public class PanelBotones extends JPanel {
 		
 		JToggleButton button = (JToggleButton)evt.getSource();
 		
+		
 		if(button.isSelected()){
 			button.setForeground(Color.BLUE);
 			button.setBackground(Color.GRAY);
@@ -102,11 +105,14 @@ public class PanelBotones extends JPanel {
 		}
 		else if(!button.isSelected()){
 			button.setForeground(Color.RED);
-			button.setBackground(Color.MAGENTA);
+			button.setBackground(Color.CYAN);
 			button.setText("Encender");
 			
 			
 			txtState.setText("Apagado");
+			
+			//TODO
+			// Apagar velocidad
 		}
 	}
 	
