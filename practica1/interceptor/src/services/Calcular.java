@@ -11,7 +11,7 @@ public class Calcular implements Filtro {
 		double distancia = (double) objeto;
 		double velocidad = distancia*360/INTERVALO;
 		
-		revolAnt = revoluciones;
+		//revolAnt = revoluciones;
 		return velocidad;
 	}
 	
