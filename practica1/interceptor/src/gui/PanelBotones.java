@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -19,7 +20,7 @@ import javax.swing.JToggleButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelBotones extends JFrame {
+public class PanelBotones extends JPanel {
 	private JTextField txtState;
 	JToggleButton tglbtnOnOff;
 	JButton btnSpeed;
@@ -34,7 +35,8 @@ public class PanelBotones extends JFrame {
 		
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		//panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel.setBorder(BorderFactory.createLoweredBevelBorder());
 		panel.setBounds(10, 161, 430, 128);
 		add(panel);
 		panel.setLayout(null);
@@ -60,7 +62,7 @@ public class PanelBotones extends JFrame {
 		panel.add(tglbtnOnOff);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_1.setBorder(BorderFactory.createLoweredBevelBorder());
 		panel_1.setBounds(10, 11, 430, 139);
 		add(panel_1);
 		panel_1.setLayout(null);
