@@ -1,10 +1,10 @@
 package services;
 
-import appExterna.Interfaz_1;
+import appExterna.Interfaz;
 
 public class GestorFiltros {
 	
-	public GestorFiltros(Interfaz_1 objetivo){}
+	public GestorFiltros(Interfaz objetivo){}
 	
 	public void setFiltro(Filtro filtro){}
 	

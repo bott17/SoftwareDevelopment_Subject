@@ -3,21 +3,19 @@ package appExterna;
 
 public class DemoInterceptor {
 
-	private static PanelBotones panel;
-	private static Ínterfaz frame;
+	private static Interfaz frame;
 	
 	public static void main(String[] args){
 		
 		
-		makeFrame(panel);
+		makeFrame();
 		
 	}
 
-	private static void makeFrame(PanelBotones jpanel) {
+	private static void makeFrame() {
 		
 
-		panel = new PanelBotones();
-		frame = new Ínterfaz(panel);
+		frame = new Interfaz();
 				
 	}
 }
