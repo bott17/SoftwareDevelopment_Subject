@@ -1,4 +1,4 @@
-package gui;
+package appExterna;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;

@@ -1,20 +1,31 @@
 package appExterna;
 
+import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Interfaz {
+import javax.swing.JFrame;
 
-	public void ejecutar(double peticion) {}
+public class Interfaz extends JFrame {
 	
-	// TODO 
-	/*
-	this.addWindowListener(new WindowAdapter (){
+	private static PanelBotones jpanel;
+	
+	public Interfaz(){
 		
-		public void windowsClosing(WindowEvent e){
-			System.exit(0);
-		}
-	});
-	*/	
-
+		jpanel = new PanelBotones();
+		
+		Dimension dimensionFrame = new Dimension(500, 350);
+		
+		this.setSize(dimensionFrame);
+		this.add(jpanel);
+		this.setVisible(true);
+		
+		this.addWindowListener(new WindowAdapter (){
+			
+			public void windowsClosing(WindowEvent e){
+				System.exit(0);
+			}
+		});
+	}
+	
 }

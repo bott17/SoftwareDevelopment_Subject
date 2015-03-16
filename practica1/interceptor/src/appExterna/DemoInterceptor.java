@@ -1,25 +1,21 @@
 package appExterna;
 
-import gui.PanelBotones;
-import gui.PrincipalFrame;
 
 public class DemoInterceptor {
 
-	private static PanelBotones panel;
-	private static PrincipalFrame frame;
+	private static Interfaz frame;
 	
 	public static void main(String[] args){
 		
 		
-		makeFrame(panel);
+		makeFrame();
 		
 	}
 
-	private static void makeFrame(PanelBotones jpanel) {
+	private static void makeFrame() {
 		
 
-		panel = new PanelBotones();
-		frame = new PrincipalFrame(panel);
+		frame = new Interfaz();
 				
 	}
 }
