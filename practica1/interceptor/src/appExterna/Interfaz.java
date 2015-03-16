@@ -27,5 +27,4 @@ public class Interfaz extends JFrame {
 			}
 		});
 	}
-	
 }

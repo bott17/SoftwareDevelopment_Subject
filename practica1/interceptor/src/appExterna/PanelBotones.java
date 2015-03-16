@@ -21,9 +21,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelBotones extends JPanel {
+	
 	private JTextField txtState;
-	JToggleButton tglbtnOnOff;
-	JButton btnSpeed;
+	private JToggleButton tglbtnOnOff;
+	private JButton btnSpeed;
 	
 	
 
@@ -89,6 +90,8 @@ public class PanelBotones extends JPanel {
 			
 			// TODO
 			//aumentar velocidad
+			enviarPeticion(50);
+			
 		}
 		
 	}
@@ -104,6 +107,8 @@ public class PanelBotones extends JPanel {
 			button.setText("Apagar");
 			
 			txtState.setText("Encendido");
+			//Iniciar velocidad
+			enviarPeticion(0);
 		}
 		else if(!button.isSelected()){
 			button.setForeground(Color.RED);
@@ -115,7 +120,13 @@ public class PanelBotones extends JPanel {
 			
 			//TODO
 			// Apagar velocidad
+			enviarPeticion(-1);
 		}
+	}
+	
+	private void enviarPeticion(double peticion){
+		
+		DemoInterceptor.sendPetition(peticion);
 	}
 	
 }

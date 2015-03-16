@@ -4,7 +4,11 @@ import appExterna.Interfaz;
 
 public class GestorFiltros {
 	
-	public GestorFiltros(Interfaz objetivo){}
+	private CadenaFiltros cadenaFiltros;
+	
+	public GestorFiltros(Interfaz objetivo){
+		cadenaFiltros = new CadenaFiltros();
+	}
 	
 	public void setFiltro(Filtro filtro){}
 	

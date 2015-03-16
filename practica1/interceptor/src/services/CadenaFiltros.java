@@ -6,10 +6,12 @@ import appExterna.Interfaz;
 
 public class CadenaFiltros {
 	
-	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
+	private ArrayList<Filtro> filtros;
 	private Interfaz objetivo;
 	
-	public  CadenaFiltros(Interfaz interfaz){} 
+	public  CadenaFiltros(){
+		filtros = new ArrayList<Filtro>();
+	} 
 	
 	public void addFiltro(Filtro filtro) throws Exception{
 		
