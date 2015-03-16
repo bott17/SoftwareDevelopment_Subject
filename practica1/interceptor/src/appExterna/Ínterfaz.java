@@ -1,13 +1,13 @@
-package gui;
+package appExterna;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class PrincipalFrame extends JFrame {
+public class Ínterfaz extends JFrame {
 	
-	public PrincipalFrame(JPanel jpanel){
+	public Ínterfaz(JPanel jpanel){
 		
 		Dimension dimensionFrame = new Dimension(500, 350);
 		

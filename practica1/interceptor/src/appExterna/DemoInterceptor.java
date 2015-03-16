@@ -1,12 +1,10 @@
 package appExterna;
 
-import gui.PanelBotones;
-import gui.PrincipalFrame;
 
 public class DemoInterceptor {
 
 	private static PanelBotones panel;
-	private static PrincipalFrame frame;
+	private static Ínterfaz frame;
 	
 	public static void main(String[] args){
 		
@@ -19,7 +17,7 @@ public class DemoInterceptor {
 		
 
 		panel = new PanelBotones();
-		frame = new PrincipalFrame(panel);
+		frame = new Ínterfaz(panel);
 				
 	}
 }

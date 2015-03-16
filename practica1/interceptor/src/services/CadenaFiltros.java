@@ -2,14 +2,14 @@ package services;
 
 import java.util.ArrayList;
 
-import appExterna.Interfaz;
+import appExterna.Interfaz_1;
 
 public class CadenaFiltros {
 	
 	private ArrayList<Filtro> filtros = new ArrayList<Filtro>();
-	private Interfaz objetivo;
+	private Interfaz_1 objetivo;
 	
-	public  CadenaFiltros(Interfaz interfaz){} 
+	public  CadenaFiltros(Interfaz_1 interfaz){} 
 	
 	public void addFiltro(Filtro filtro) throws Exception{
 		
@@ -28,7 +28,7 @@ public class CadenaFiltros {
 		objetivo.ejecutar(peticion);
 	}
 
-	public void setObjetivo(Interfaz objetivo){
+	public void setObjetivo(Interfaz_1 objetivo){
 		 this.objetivo = objetivo;
 	}
 
