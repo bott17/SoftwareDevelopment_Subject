@@ -5,8 +5,8 @@ import generic.TC;
 
 public class BiciMontana extends Bicicleta {
 
-	public BiciMontana(TC tipo) {
-		super(TC.MONTANA);
+	public BiciMontana(String numeroCorredor) {
+		super(TC.MONTANA, numeroCorredor);
 	}
 
 }

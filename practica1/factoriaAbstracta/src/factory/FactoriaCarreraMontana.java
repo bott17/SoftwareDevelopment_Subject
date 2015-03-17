@@ -11,9 +11,9 @@ public abstract class FactoriaCarreraMontana {
 	
 	private static CarreraMontana carrera;
 	
-	private static BiciMontana makeBicicletaMontana(){
+	private static BiciMontana makeBicicletaMontana(int numeroCorredor){
 		
-		BiciMontana newBici = new BiciMontana(null);
+		BiciMontana newBici = new BiciMontana(Integer.toString(numeroCorredor));
 		newBici.montarCuadro(new CuadroMontana());
 		newBici.montarManillar(new ManillarMontana());
 		newBici.montarRuedas(new RuedasMontana());
@@ -26,7 +26,7 @@ public abstract class FactoriaCarreraMontana {
 		carrera = new CarreraMontana();
 		
 		for (int i=0; i<nParticipantes; i++){
-			carrera.apuntarParticipante(makeBicicletaMontana());
+			carrera.apuntarParticipante(makeBicicletaMontana(i));
 		}
 		
 		carrera.start();
