@@ -1,18 +1,25 @@
 package hebras;
 
-public class CarreraMontana extends Carrera {
+import generic.Bicicleta;
 
-	public CarreraMontana() {
+public class CarreraMontana extends Carrera {
+	
+
+	public CarreraMontana(int duracion) {
+		super(duracion);
 		
-		super();
 	}
 	
 	@Override
 	public void run() {
 		System.out.println("Carrera de montaña iniciada");
 		
+		for(Bicicleta participante: participantes){
+			participante.start();
+		}
+		
 		try {
-			this.sleep(60000);
+			Thread.sleep(duracion);
 			this.retirarBicicletas("Montana");
 		} catch (InterruptedException e) {
 			e.printStackTrace();

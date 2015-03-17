@@ -37,6 +37,10 @@ public abstract class Bicicleta extends Thread {
 	
 	private void correr(){
 		distancia++;
+		if (tipo.equals(TC.CARRETERA))
+			distancia++;
+		if(distancia % 5 == 0)
+			System.out.println(tipo.toString() + " "+ numeroCorredor + " distancia: " + distancia);
 	}
 	
 	public void run(){
@@ -44,10 +48,8 @@ public abstract class Bicicleta extends Thread {
 		while(correr){
 			
 			try {
-				Thread.sleep((long) Math.random() * 5);
+				Thread.sleep((long) (Math.random() * 1000));
 				this.correr();
-				if(distancia % 7 == 0)
-					System.out.println(numeroCorredor + " distancia: " + distancia);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -57,6 +59,15 @@ public abstract class Bicicleta extends Thread {
 	public void pararBici(){
 		correr = false;
 	}
+	
+	public int getDistancia() {
+		return distancia;
+	}
+	
+	public String getNumero(){
+		return numeroCorredor;
+	}
+	
 	
 	@Override
 	public String toString(){

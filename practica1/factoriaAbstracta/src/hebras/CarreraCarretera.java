@@ -1,18 +1,24 @@
 package hebras;
 
+import generic.Bicicleta;
+
 public class CarreraCarretera extends Carrera{
 	
-	public CarreraCarretera(){
+	public CarreraCarretera(int duracion){
 		
-		super();
+		super(duracion);
 		
 	}
 	
 	public void run (){
 		System.out.println("Carrera de carretera iniciada");
 		
+		for(Bicicleta participante: participantes){
+			participante.start();
+		}
+		
 		try {
-			this.sleep(60000);
+			Thread.sleep(duracion);
 			this.retirarBicicletas("Carretera");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
