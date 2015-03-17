@@ -48,7 +48,7 @@ public abstract class Bicicleta extends Thread {
 		while(correr){
 			
 			try {
-				Thread.sleep((long) (Math.random() * 1000));
+				Thread.sleep((long) (Math.random() * 10000));
 				this.correr();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

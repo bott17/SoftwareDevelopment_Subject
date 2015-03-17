@@ -19,7 +19,7 @@ public class CarreraMontana extends Carrera {
 		}
 		
 		try {
-			Thread.sleep(duracion);
+			Thread.sleep(duracion*1000);
 			this.retirarBicicletas("Montana");
 		} catch (InterruptedException e) {
 			e.printStackTrace();

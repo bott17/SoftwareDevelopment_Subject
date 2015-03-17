@@ -18,7 +18,7 @@ public class CarreraCarretera extends Carrera{
 		}
 		
 		try {
-			Thread.sleep(duracion);
+			Thread.sleep(duracion*1000);
 			this.retirarBicicletas("Carretera");
 		} catch (InterruptedException e) {
 			e.printStackTrace();
