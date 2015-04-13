@@ -4,4 +4,7 @@
 /.idea/libraries
 .DS_Store
 /build
-/captures
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+build/

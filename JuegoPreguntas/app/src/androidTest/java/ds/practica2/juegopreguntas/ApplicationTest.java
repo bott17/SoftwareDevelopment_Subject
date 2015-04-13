@@ -1,4 +1,4 @@
-package ds.p2.juegopreguntas;
+package ds.practica2.juegopreguntas;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

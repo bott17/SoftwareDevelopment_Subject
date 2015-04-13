@@ -1,4 +1,4 @@
-package ds.p2.juegopreguntas;
+package ds.practica2.juegopreguntas;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

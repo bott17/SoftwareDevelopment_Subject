@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ds.p2.juegopreguntas" >
+    package="ds.practica2.juegopreguntas" >
 
     <application
         android:allowBackup="true"
