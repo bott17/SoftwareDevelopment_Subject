@@ -6,8 +6,10 @@ package ds.practica2.juegopreguntas.Preguntas;
 public abstract class Pregunta {
 
     TipoPregunta tipo;
+    //Categoria categoria;
 
 
+    // TODO aniadir la categoria
     Pregunta (TipoPregunta _nuevoTipo_){
 
         tipo = _nuevoTipo_;
