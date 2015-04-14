@@ -6,12 +6,16 @@ package ds.practica2.juegopreguntas.Preguntas;
 public abstract class Pregunta {
 
     TipoPregunta tipo;
-    //Categoria categoria;
+    private int respuesta;
+    //private Categoria categoria;
 
-
-    // TODO aniadir la categoria
+    // TODO aniadir campos al constructor
     Pregunta (TipoPregunta _nuevoTipo_){
 
         tipo = _nuevoTipo_;
+    }
+
+    public int getRespuesta() {
+        return respuesta;
     }
 }

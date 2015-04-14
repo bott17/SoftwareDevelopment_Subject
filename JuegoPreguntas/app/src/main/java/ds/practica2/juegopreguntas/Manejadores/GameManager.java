@@ -1,5 +1,7 @@
 package ds.practica2.juegopreguntas.Manejadores;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.Juego.TipoJuego;
@@ -13,6 +15,8 @@ import ds.practica2.juegopreguntas.Preguntas.TipoPregunta;
  */
 public class GameManager {
 
+    private static String TAG = "GameManager";
+
     // Instancia singleton
     private static GameManager instance = null;
 
@@ -20,6 +24,7 @@ public class GameManager {
     private TipoJuego tipoJuego;
     private ArrayList<Pregunta> listaPreguntas = new ArrayList<>();
     private int indiceJuego = 0; // Indica la pregunta por la que va el jugador
+    private int aciertosJugador = 0;
 
 
     /**
@@ -53,6 +58,8 @@ public class GameManager {
      */
     private void initGame() {
 
+        Log.d(TAG, "Iniciando juego...");
+
         // Variables comunes al tipo de juego
         int numeroPreguntas = -1;
         int fallosPermitidos = -1;
@@ -85,10 +92,34 @@ public class GameManager {
     public Pregunta siguientePregunta(){
 
         if(indiceJuego < listaPreguntas.size()) {
+            Log.d(TAG, "Siguiente pregunta obtenida...");
             indiceJuego++;
             return listaPreguntas.get(indiceJuego - 1);
         }
-        else
+        else {
+            Log.d(TAG, "No quedan mas preguntas...");
             return null;
+        }
+    }
+
+    public boolean validarPregunta(Pregunta pregunta, int respuesta){
+
+        boolean resultado = false;
+
+        if(pregunta.getRespuesta() == respuesta){
+            Log.d(TAG, "Respuesta correcta");
+            // TODO
+            resultado = true;
+            aciertosJugador++;
+            EstadisticasManager.updateAcierto(pregunta);
+        }
+        else{
+            Log.d(TAG, "Respuesta incorrecta");
+            // TODO
+            EstadisticasManager.updateFallo(pregunta);
+        }
+
+        return resultado;
+
     }
 }
