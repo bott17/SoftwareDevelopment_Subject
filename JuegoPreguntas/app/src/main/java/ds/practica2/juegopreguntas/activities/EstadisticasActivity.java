@@ -1,24 +1,46 @@
-package ds.practica2.juegopreguntas;
+package ds.practica2.juegopreguntas.activities;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import ds.practica2.juegopreguntas.R;
 
-public class MainActivity extends ActionBarActivity {
+public class EstadisticasActivity extends MyActionBarActivity {
+
+    private Button botonPrincipal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_estadisticas);
+
+        initComponents();
+    }
+
+    @Override
+    protected void initComponents() {
+
+        botonPrincipal = (Button) findViewById(R.id.bottonPrincipal);
+        botonPrincipal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_estadisticas, menu);
         return true;
     }
 
