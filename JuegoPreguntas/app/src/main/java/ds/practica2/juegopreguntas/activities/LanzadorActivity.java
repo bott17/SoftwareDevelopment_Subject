@@ -40,6 +40,10 @@ public class LanzadorActivity extends MyActionBarActivity {
             Log.d(TAG, "No hay juego iniciado.... Creando nuevo juego");
             initGame();
         }
+        else{
+            Log.d(TAG, "Cargando juego iniciado...");
+            resumeGame();
+        }
     }
 
     private void initGame() {;
@@ -79,6 +83,32 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         preguntaActual = gameManager.siguientePregunta();
 
+        // Comprobación de que queden preguntas
+        if(preguntaActual != null)
+            obtenerDatosPregunta(preguntaActual);
+        else
+            finalizarJuego();
+
+    }
+
+    private void finalizarJuego() {
+        gameManager.finJuego();
+
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(i);
+    }
+
+    private void resumeGame() {
+
+        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
+        preguntaActual = gameManager.getUltimaPregunta();
+
+        obtenerDatosPregunta(preguntaActual);
+    }
+
+
+    private void obtenerDatosPregunta(Pregunta pregunta){
+
         if (preguntaActual.getTipo().equals(TipoPregunta.TEXTO)) {
             textTituloPregunta.setText(((PreguntaTexto)preguntaActual).getTituloPregunta());
         }
@@ -114,7 +144,7 @@ public class LanzadorActivity extends MyActionBarActivity {
         Log.d(TAG, "onStop Lanzador...");
 
         // TODO se destruye el juego al cerrar la activity
-        gameManager.finJuego();
+        //gameManager.finJuego();
     }
 
     @Override

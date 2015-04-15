@@ -138,4 +138,8 @@ public class GameManager {
     public void finJuego(){
         instance = null;
     }
+
+    public Pregunta getUltimaPregunta() {
+        return listaPreguntas.get(indiceJuego-1);
+    }
 }
