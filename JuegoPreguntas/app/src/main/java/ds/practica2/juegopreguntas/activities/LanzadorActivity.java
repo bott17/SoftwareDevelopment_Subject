@@ -34,8 +34,8 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         Log.d(TAG, "Creando actividad de juego...");
 
-        // TODO siempre se lanza la actividad volviendo del menu principal. Puede dar null pointer en la ultima pregunta
         initComponents();
+
         if(gameManager.checkNuevoJuego()) {
             Log.d(TAG, "No hay juego iniciado.... Creando nuevo juego");
             initGame();
@@ -135,22 +135,5 @@ public class LanzadorActivity extends MyActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        Log.d(TAG, "onStop Lanzador...");
-
-        // TODO se destruye el juego al cerrar la activity
-        //gameManager.finJuego();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Log.d(TAG, "Lanzador DESTRUIDO...");
     }
 }

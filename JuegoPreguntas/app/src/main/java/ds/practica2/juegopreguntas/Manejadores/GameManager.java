@@ -114,12 +114,12 @@ public class GameManager {
             // TODO
             resultado = true;
             aciertosJugador++;
-            //EstadisticasManager.updateAcierto(pregunta);
+            EstadisticasManager.updateAcierto(pregunta);
         }
         else{
             Log.d(TAG, "Respuesta incorrecta");
             // TODO
-            //EstadisticasManager.updateFallo(pregunta);
+            EstadisticasManager.updateFallo(pregunta, respuesta);
         }
 
         return resultado;
