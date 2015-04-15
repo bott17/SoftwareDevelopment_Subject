@@ -3,6 +3,7 @@ package ds.practica2.juegopreguntas.Manejadores;
 import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.Preguntas.Pregunta;
+import ds.practica2.juegopreguntas.Preguntas.PreguntaTexto;
 import ds.practica2.juegopreguntas.Preguntas.TipoPregunta;
 
 /**
@@ -15,6 +16,9 @@ public abstract class InfoManager {
         // TODO Recuperar imagenes almacenadas
 
         ArrayList<Pregunta> preguntas = new ArrayList<>();
+
+        preguntas.add(new PreguntaTexto("Pregunta1"));
+        preguntas.add(new PreguntaTexto("Pregunta2"));
 
         return preguntas;
     }

@@ -5,8 +5,15 @@ package ds.practica2.juegopreguntas.Preguntas;
  */
 public class PreguntaTexto extends Pregunta{
 
+    private String tituloPregunta = "DEFAULT_QUESTION";
 
-    public PreguntaTexto(TipoPregunta _nuevoTipo_) {
-        super(_nuevoTipo_);
+
+    public PreguntaTexto(String _titulo_) {
+
+        super(TipoPregunta.TEXTO);
+        tituloPregunta = _titulo_;
+
     }
+
+    public String getTituloPregunta(){ return tituloPregunta;}
 }

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.Juego.TipoJuego;
 import ds.practica2.juegopreguntas.Preguntas.Pregunta;
-import ds.practica2.juegopreguntas.Preguntas.PreguntaTexto;
 import ds.practica2.juegopreguntas.Preguntas.TipoPregunta;
 
 /**
@@ -111,15 +110,19 @@ public class GameManager {
             // TODO
             resultado = true;
             aciertosJugador++;
-            EstadisticasManager.updateAcierto(pregunta);
+            //EstadisticasManager.updateAcierto(pregunta);
         }
         else{
             Log.d(TAG, "Respuesta incorrecta");
             // TODO
-            EstadisticasManager.updateFallo(pregunta);
+            //EstadisticasManager.updateFallo(pregunta);
         }
 
         return resultado;
 
+    }
+
+    public void finJuego(){
+        instance = null;
     }
 }
