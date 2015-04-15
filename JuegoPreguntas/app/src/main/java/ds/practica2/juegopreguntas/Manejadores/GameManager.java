@@ -21,9 +21,9 @@ public class GameManager {
 
     // Variables de juego
     private TipoJuego tipoJuego;
-    private ArrayList<Pregunta> listaPreguntas = new ArrayList<>();
-    private int indiceJuego = 0; // Indica la pregunta por la que va el jugador
-    private int aciertosJugador = 0;
+    private ArrayList<Pregunta> listaPreguntas;
+    private int indiceJuego; // Indica la pregunta por la que va el jugador
+    private int aciertosJugador;
 
 
     /**
@@ -58,6 +58,10 @@ public class GameManager {
     private void initGame() {
 
         Log.d(TAG, "Iniciando juego...");
+
+        indiceJuego = 0;
+        aciertosJugador = 0;
+        listaPreguntas  = new ArrayList<>();
 
         // Variables comunes al tipo de juego
         int numeroPreguntas = -1;
@@ -120,6 +124,15 @@ public class GameManager {
 
         return resultado;
 
+    }
+
+    public boolean checkNuevoJuego(){
+        boolean newGame = false;
+
+        if(indiceJuego == 0)
+            newGame = true;
+
+        return newGame;
     }
 
     public void finJuego(){

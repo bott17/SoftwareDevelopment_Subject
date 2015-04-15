@@ -24,7 +24,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     private Button botonPrincipal, botonPregunta, botonResponder;
     TextView textTituloPregunta;
 
-    private GameManager gameManager = null;
+    private GameManager gameManager;
     private Pregunta preguntaActual;
 
     @Override
@@ -36,16 +36,21 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         // TODO siempre se lanza la actividad volviendo del menu principal. Puede dar null pointer en la ultima pregunta
         initComponents();
-        initGame();
+        if(gameManager.checkNuevoJuego()) {
+            Log.d(TAG, "No hay juego iniciado.... Creando nuevo juego");
+            initGame();
+        }
     }
 
-    private void initGame() {
-        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
+    private void initGame() {;
+
         cambiarPregunta();
     }
 
     @Override
     protected void initComponents() {
+
+        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
 
         textTituloPregunta = (TextView) findViewById(R.id.textTituloPregunta);
 
@@ -103,10 +108,19 @@ public class LanzadorActivity extends MyActionBarActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        Log.d(TAG, "onStop Lanzador...");
+
+        // TODO se destruye el juego al cerrar la activity
+        gameManager.finJuego();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
 
-        gameManager.finJuego();
-        preguntaActual = null;
+        Log.d(TAG, "Lanzador DESTRUIDO...");
     }
 }
