@@ -49,7 +49,13 @@ public class MainActivity extends MyActionBarActivity {
         });
 
         botonExterno = (Button) findViewById(R.id.bottonExter);
-        // TODO Aniadir
+       botonExterno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ExternalGameActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

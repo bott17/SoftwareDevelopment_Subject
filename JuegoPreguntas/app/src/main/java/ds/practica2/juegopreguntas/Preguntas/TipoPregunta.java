@@ -1,4 +1,4 @@
-package ds.practica2.juegopreguntas.Preguntas;
+package ds.practica2.juegopreguntas.preguntas;
 
 /**
  * Created by bott1 on 14/04/2015.

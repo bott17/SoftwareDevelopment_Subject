@@ -1,12 +1,12 @@
-package ds.practica2.juegopreguntas.Manejadores;
+package ds.practica2.juegopreguntas.manejadores;
 
 import android.util.Log;
 
 import java.util.ArrayList;
 
-import ds.practica2.juegopreguntas.Preguntas.Pregunta;
-import ds.practica2.juegopreguntas.Preguntas.PreguntaTexto;
-import ds.practica2.juegopreguntas.Preguntas.TipoPregunta;
+import ds.practica2.juegopreguntas.preguntas.Pregunta;
+import ds.practica2.juegopreguntas.preguntas.PreguntaTexto;
+import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 
 /**
  * Created by bott1 on 14/04/2015.
