@@ -4,14 +4,19 @@ import ds.practica2.juegopreguntas.activities.util.SystemUiHider;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 
 import ds.practica2.juegopreguntas.R;
 
@@ -53,6 +58,10 @@ public class ExternalGameActivity extends Activity {
     // Variables propias
     private static String TAG = "ExternalGameActivity";
     private WebView marco;
+    private Button botonCambiarURL;
+
+    AlertDialog.Builder builder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +81,42 @@ public class ExternalGameActivity extends Activity {
         marco.loadUrl("https://www.google.es");
         Log.d(TAG, "URL mostrada: " + marco.getUrl());
 
+        botonCambiarURL = (Button)findViewById(R.id.botonCambiarURL);
+        botonCambiarURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                builder = new AlertDialog.Builder(ExternalGameActivity.this);
+                builder.setTitle("NuevaURL");
+
+                // Set up the input
+                final EditText input = new EditText(ExternalGameActivity.this);
+                // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                builder.setView(input);
+
+                // Set up the buttons
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        marco.loadUrl(input.getText().toString());
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+
+                builder.show();
+            }
+        });
     }
+
+
+
 
     /**
      * Necesario para que no abra el navegador al pulsar algun enlace
@@ -148,7 +191,7 @@ public class ExternalGameActivity extends Activity {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        findViewById(R.id.botonCambiarURL).setOnTouchListener(mDelayHideTouchListener);
     }
 
     @Override
