@@ -4,7 +4,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ds.practica2.juegopreguntas.preguntas.CategoriaPregunta;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
+import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
 import ds.practica2.juegopreguntas.preguntas.PreguntaTexto;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 
@@ -23,8 +25,25 @@ public abstract class InfoManager {
 
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
-        preguntas.add(new PreguntaTexto("Pregunta1"));
-        preguntas.add(new PreguntaTexto("Pregunta2"));
+        ArrayList<String> respuestas = new ArrayList<>();
+        respuestas.add("respuesta1");
+        respuestas.add("respuesta2");
+        respuestas.add("respuesta3");
+        ArrayList<Integer> soluciones = new ArrayList<>();
+        soluciones.add(0);
+        soluciones.add(1);
+
+        preguntas.add(PreguntaFactoria.makePregunta("Pregunta factoria1", CategoriaPregunta.CIENCIAS, respuestas, soluciones ));
+
+        respuestas = new ArrayList<>();
+        respuestas.add("respuesta1");
+        respuestas.add("respuesta2");
+        respuestas.add("respuesta3");
+        soluciones = new ArrayList<>();
+        soluciones.add(2);
+        soluciones.add(1);
+
+        preguntas.add(PreguntaFactoria.makePregunta("Pregunta factoria2", CategoriaPregunta.CIENCIAS, respuestas, soluciones ));
 
         return preguntas;
     }

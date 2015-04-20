@@ -1,5 +1,7 @@
 package ds.practica2.juegopreguntas.manejadores;
 
+import java.util.ArrayList;
+
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 
 /**
@@ -11,7 +13,7 @@ public abstract class EstadisticasManager {
         // TODO implementar
     }
 
-    public static void updateFallo(Pregunta pregunta, int respuesta) {
+    public static void updateFallo(Pregunta pregunta, ArrayList<Integer> respuesta) {
         // TODO implementar
     }
 }

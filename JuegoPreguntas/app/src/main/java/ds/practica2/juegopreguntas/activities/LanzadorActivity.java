@@ -8,6 +8,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
@@ -77,6 +80,24 @@ public class LanzadorActivity extends MyActionBarActivity {
 
 
         botonResponder = (Button) findViewById(R.id.botoContestar);
+        botonResponder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Respuestas falseadas
+                ArrayList<Integer> respuestasFalsas = new ArrayList<Integer>();
+                respuestasFalsas.add(0);
+                respuestasFalsas.add(1);
+
+                // Valoracion de las respuestas, el primer campo de pair indica el resultado
+                if(gameManager.validarPregunta(preguntaActual, respuestasFalsas).first){
+                    Toast.makeText(getApplicationContext(), "¡Respuesta Correcta!", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
+
+                cambiarPregunta();
+            }
+        });
     }
 
     private void cambiarPregunta(){
@@ -109,8 +130,8 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void obtenerDatosPregunta(Pregunta pregunta){
 
-        if (preguntaActual.getTipo().equals(TipoPregunta.TEXTO)) {
-            textTituloPregunta.setText(((PreguntaTexto)preguntaActual).getTituloPregunta());
+        if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
+            textTituloPregunta.setText(preguntaActual.getTituloPregunta());
         }
     }
 

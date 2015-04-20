@@ -1,6 +1,7 @@
 package ds.practica2.juegopreguntas.manejadores;
 
 import android.util.Log;
+import android.util.Pair;
 
 import java.util.ArrayList;
 
@@ -105,25 +106,35 @@ public class GameManager {
         }
     }
 
-    public boolean validarPregunta(Pregunta pregunta, int respuesta){
+    /**
+     * Devuelve el resultado de la evaluación de la pregunta, incluyendo las respuestas que no se marcaron correctamente
+     * @param pregunta Pregunta a evaluar
+     * @param respuestas Respuestas a evaluar
+     * @return Pair con el primer campo que indica el resultado, en el segundo las respuestas correctas sin acertar
+     */
+    public Pair<Boolean, ArrayList<Integer> > validarPregunta(Pregunta pregunta, ArrayList<Integer> respuestas){
 
-        boolean resultado = false;
+        boolean correcto = false;
 
-        //TODO adaptar a multiples respuestas
-        /*
-        if(pregunta.getRespuesta() == respuesta){
+        ArrayList<Integer> respuestasPregunta = new ArrayList<>(pregunta.getRespuestas());
+
+        for(Integer respuesta: respuestas){
+            if(respuestasPregunta.contains(respuesta))
+                respuestasPregunta.remove(respuesta);
+        }
+
+        if(respuestasPregunta.size() == 0){
             Log.d(TAG, "Respuesta correcta");
-            // TODO
-            resultado = true;
+            correcto = true;
             aciertosJugador++;
             EstadisticasManager.updateAcierto(pregunta);
         }
         else{
             Log.d(TAG, "Respuesta incorrecta");
-            // TODO
-            EstadisticasManager.updateFallo(pregunta, respuesta);
+            EstadisticasManager.updateFallo(pregunta, respuestasPregunta);
         }
-        */
+
+        Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(correcto,respuestasPregunta);
 
         return resultado;
 

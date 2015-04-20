@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Pregunta {
 
+    private String tituloPregunta;
     private TipoPregunta tipo;
     private CategoriaPregunta categoria;
 
@@ -23,6 +24,7 @@ public class Pregunta {
 
     protected Pregunta(TipoPregunta _tipo_, String _titulo_, CategoriaPregunta _categoria_, ArrayList<String> _respuestas_, ArrayList<Integer> _respuestasCorrectas_) {
         // TODO
+        tituloPregunta = _titulo_;
         tipo = _tipo_;
         categoria = _categoria_;
         respuestas = new ArrayList<>(_respuestas_);
@@ -35,4 +37,6 @@ public class Pregunta {
     }
 
     public TipoPregunta getTipo(){ return tipo;}
+
+    public String getTituloPregunta(){ return tituloPregunta;}
 }
