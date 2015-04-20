@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import ds.practica2.juegopreguntas.Juego.TipoJuego;
-import ds.practica2.juegopreguntas.Manejadores.GameManager;
-import ds.practica2.juegopreguntas.Preguntas.Pregunta;
-import ds.practica2.juegopreguntas.Preguntas.PreguntaTexto;
-import ds.practica2.juegopreguntas.Preguntas.TipoPregunta;
+import ds.practica2.juegopreguntas.juego.TipoJuego;
+import ds.practica2.juegopreguntas.manejadores.GameManager;
+import ds.practica2.juegopreguntas.preguntas.Pregunta;
+import ds.practica2.juegopreguntas.preguntas.PreguntaTexto;
+import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 import ds.practica2.juegopreguntas.R;
 
 public class LanzadorActivity extends MyActionBarActivity {

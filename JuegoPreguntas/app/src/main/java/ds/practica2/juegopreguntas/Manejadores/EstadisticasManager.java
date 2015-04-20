@@ -1,6 +1,6 @@
-package ds.practica2.juegopreguntas.Manejadores;
+package ds.practica2.juegopreguntas.manejadores;
 
-import ds.practica2.juegopreguntas.Preguntas.Pregunta;
+import ds.practica2.juegopreguntas.preguntas.Pregunta;
 
 /**
  * Created by bott1 on 15/04/2015.

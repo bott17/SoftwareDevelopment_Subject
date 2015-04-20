@@ -1,4 +1,4 @@
-package ds.practica2.juegopreguntas.Preguntas;
+package ds.practica2.juegopreguntas.preguntas;
 
 import java.util.ArrayList;
 
