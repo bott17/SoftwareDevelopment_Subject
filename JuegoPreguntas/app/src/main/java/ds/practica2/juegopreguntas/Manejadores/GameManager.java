@@ -123,7 +123,7 @@ public class GameManager {
                 respuestasPregunta.remove(respuesta);
         }
 
-        if(respuestasPregunta.size() == 0){
+        if(respuestasPregunta.size() == 0 && pregunta.getRespuestas().size() == respuestas.size()){
             Log.d(TAG, "Respuesta correcta");
             correcto = true;
             aciertosJugador++;

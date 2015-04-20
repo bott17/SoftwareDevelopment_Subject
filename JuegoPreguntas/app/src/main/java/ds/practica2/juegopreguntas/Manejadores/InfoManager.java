@@ -47,4 +47,13 @@ public abstract class InfoManager {
 
         return preguntas;
     }
+
+    public static void updateAcierto(TipoPregunta tipo, CategoriaPregunta categoria) {
+        //TODO Implementar
+    }
+
+    public static void updateFallo(TipoPregunta tipo, CategoriaPregunta categoria) {
+        // TODO Implementar
+
+    }
 }

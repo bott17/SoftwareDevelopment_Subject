@@ -39,4 +39,8 @@ public class Pregunta {
     public TipoPregunta getTipo(){ return tipo;}
 
     public String getTituloPregunta(){ return tituloPregunta;}
+
+    public CategoriaPregunta getCategoria() {
+        return categoria;
+    }
 }
