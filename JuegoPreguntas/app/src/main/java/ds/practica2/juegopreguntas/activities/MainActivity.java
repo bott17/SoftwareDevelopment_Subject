@@ -1,6 +1,7 @@
 package ds.practica2.juegopreguntas.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 
 import ds.practica2.juegopreguntas.R;
+import ds.practica2.juegopreguntas.database.DBAdapter;
+import ds.practica2.juegopreguntas.manejadores.InfoManager;
 
 
 public class MainActivity extends MyActionBarActivity {
@@ -23,6 +26,28 @@ public class MainActivity extends MyActionBarActivity {
         setContentView(R.layout.activity_main);
 
         initComponents();
+
+        //testDB();
+
+        testInfomanager();
+    }
+
+    private void testInfomanager() {
+
+        InfoManager.startDB(getApplicationContext());
+        InfoManager.getPreguntas(1, null);
+    }
+
+    public void testDB(){
+        DBAdapter mDbHelper = new DBAdapter(getApplicationContext());
+        mDbHelper.createDatabase();
+        mDbHelper.open();
+
+        Cursor testdata = mDbHelper.getTestData();
+
+        mDbHelper.close();
+
+        Log.d(TAG, testdata.getString(1));
     }
 
     @Override
