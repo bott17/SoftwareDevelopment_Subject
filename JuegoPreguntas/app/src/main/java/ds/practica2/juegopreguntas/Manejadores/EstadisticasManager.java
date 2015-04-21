@@ -1,5 +1,7 @@
 package ds.practica2.juegopreguntas.manejadores;
 
+import java.util.ArrayList;
+
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 
 /**
@@ -8,10 +10,12 @@ import ds.practica2.juegopreguntas.preguntas.Pregunta;
 public abstract class EstadisticasManager {
 
     public static void updateAcierto(Pregunta pregunta) {
-        // TODO implementar
+
+        InfoManager.updateAcierto(pregunta.getTipo(), pregunta.getCategoria());
     }
 
-    public static void updateFallo(Pregunta pregunta, int respuesta) {
-        // TODO implementar
+    public static void updateFallo(Pregunta pregunta, ArrayList<Integer> respuestas) {
+
+        InfoManager.updateFallo(pregunta.getTipo(), pregunta.getCategoria());
     }
 }

@@ -17,7 +17,7 @@ public abstract class PreguntaFactoria {
      * @param respuestasCorrectas Numero identificativo de las respuestas correctas
      * @return Pregunta
      */
-    public Pregunta makePregunta( String titulo, CategoriaPregunta categoria, ArrayList<String> respuestas, ArrayList<Integer> respuestasCorrectas ){
+    public static Pregunta makePregunta( String titulo, CategoriaPregunta categoria, ArrayList<String> respuestas, ArrayList<Integer> respuestasCorrectas ){
 
         Pregunta pregunta = new Pregunta(TipoPregunta.DEFAULT, titulo, categoria, respuestas, respuestasCorrectas);
         return pregunta;
@@ -34,7 +34,7 @@ public abstract class PreguntaFactoria {
      * @param refMultimedia Referencia del recurso multimedia.
      * @return Pregunta de tipo multimedia
      */
-    public PreguntaMultimedia makePreguntaMultimedia(TipoPregunta tipoPregunta, String titulo, CategoriaPregunta categoria,
+    public static PreguntaMultimedia makePreguntaMultimedia(TipoPregunta tipoPregunta, String titulo, CategoriaPregunta categoria,
                                                      ArrayList<String> respuestas, ArrayList<Integer> respuestasCorrectas, String refMultimedia){
 
         PreguntaMultimedia pregunta = new PreguntaMultimedia(tipoPregunta, titulo, categoria, respuestas, respuestasCorrectas, refMultimedia);
