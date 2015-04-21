@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ds.practica2.juegopreguntas.Estadisticas;
 import ds.practica2.juegopreguntas.preguntas.CategoriaPregunta;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
@@ -54,6 +55,14 @@ public abstract class InfoManager {
 
     public static void updateFallo(TipoPregunta tipo, CategoriaPregunta categoria) {
         // TODO Implementar
+
+    }
+
+    public Estadisticas getEstadisticas(){
+
+        // TODO Obtener estadisticas de BD
+        Estadisticas estadisticas = new Estadisticas();
+        return estadisticas;
 
     }
 }
