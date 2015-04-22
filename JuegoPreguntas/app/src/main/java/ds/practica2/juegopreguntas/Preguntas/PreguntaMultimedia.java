@@ -10,7 +10,7 @@ public class PreguntaMultimedia extends Pregunta {
     private String refMultimedia;
 
 
-    protected PreguntaMultimedia(TipoPregunta tipo, String titulo, CategoriaPregunta categoria, ArrayList<String> respuestas, ArrayList<Integer> respuestasCorrectas, String _refMultimedia_) {
+    protected PreguntaMultimedia(TipoPregunta tipo, String titulo, int categoria, ArrayList<String> respuestas, ArrayList<Integer> respuestasCorrectas, String _refMultimedia_) {
         super(tipo, titulo, categoria, respuestas, respuestasCorrectas);
 
         refMultimedia = _refMultimedia_;

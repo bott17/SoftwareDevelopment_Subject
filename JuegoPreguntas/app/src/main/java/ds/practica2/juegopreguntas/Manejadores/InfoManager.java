@@ -32,55 +32,59 @@ public abstract class InfoManager {
 
         Log.d(TAG, "Obteniendo preguntas...");
 
-        // TODO Recuperar imagenes almacenadas
-
-        /*
-        ArrayList<Pregunta> preguntas = new ArrayList<>();
-
-        ArrayList<String> respuestas = new ArrayList<>();
-        respuestas.add("respuesta1");
-        respuestas.add("respuesta2");
-        respuestas.add("respuesta3");
-        ArrayList<Integer> soluciones = new ArrayList<>();
-        soluciones.add(0);
-        soluciones.add(1);
-
-        preguntas.add(PreguntaFactoria.makePregunta("Pregunta factoria1", CategoriaPregunta.CIENCIAS, respuestas, soluciones ));
-
-        respuestas = new ArrayList<>();
-        respuestas.add("respuesta1");
-        respuestas.add("respuesta2");
-        respuestas.add("respuesta3");
-        soluciones = new ArrayList<>();
-        soluciones.add(2);
-        soluciones.add(1);
-
-        preguntas.add(PreguntaFactoria.makePregunta("Pregunta factoria2", CategoriaPregunta.CIENCIAS, respuestas, soluciones ));
-        */
-
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
         mDbHelper.open();
-        Cursor testdata = mDbHelper.getPreguntas();
-        mDbHelper.close();
-
-        Log.d(TAG, testdata.getString(testdata.getColumnIndex("titulo")));
-        testdata.moveToNext();
-        testdata.moveToNext();
-        testdata.moveToNext();
-        testdata.moveToNext();
-        testdata.moveToNext();
-        Log.d(TAG, testdata.getString(testdata.getColumnIndex("titulo")));
+        Cursor preguntasCursor = mDbHelper.getPreguntas();
 
 
+        if(preguntasCursor.moveToFirst()) {
+            // Recuperar titulo
+            String title= preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo"));
+            int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
+
+            ArrayList<String> listaRespuestas  = new ArrayList<>();
+            ArrayList<Integer> listaSoluciones = new ArrayList<>();
+
+            do {
+
+
+                // Comprobacion: si el titulo cambia, crear pregunta e inicializar los campos de la pregunta
+                if( !title.equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")))) {
+                    preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, listaSoluciones));
+
+                    listaRespuestas  = new ArrayList<>();
+                    listaSoluciones = new ArrayList<>();
+                    title = (preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")));
+
+                }
+
+                // Añadir pregunta solo si es diferente a la anterior o no hay ninguna introducida
+                if(listaSoluciones.size() == 0 || !listaSoluciones.get(listaRespuestas.size()-1).equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")))  ) {
+
+                    listaRespuestas.add(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")));
+                }
+
+                // TODO añadir respuestas
+                // Añadir respuestas solo si son direfentes a la anterior o no hay ninguna introducida anterior mente
+                listaSoluciones.add(1);
+
+                // TODO añadir categoria
+                idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
+
+            } while (preguntasCursor.moveToNext());
+
+            // Crear la ultima pregunta, una vez el cursor ya ha finalizado
+            preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, listaSoluciones));
+        }
         return preguntas;
     }
 
-    public static void updateAcierto(TipoPregunta tipo, CategoriaPregunta categoria) {
+    public static void updateAcierto(TipoPregunta tipo, int categoria) {
         //TODO Implementar
     }
 
-    public static void updateFallo(TipoPregunta tipo, CategoriaPregunta categoria) {
+    public static void updateFallo(TipoPregunta tipo, int categoria) {
         // TODO Implementar
 
     }
