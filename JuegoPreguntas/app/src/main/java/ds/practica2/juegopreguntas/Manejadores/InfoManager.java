@@ -1,10 +1,13 @@
 package ds.practica2.juegopreguntas.manejadores;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.util.Log;
 
 import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.Estadisticas;
+import ds.practica2.juegopreguntas.database.DBAdapter;
 import ds.practica2.juegopreguntas.preguntas.CategoriaPregunta;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
@@ -18,42 +21,70 @@ public abstract class InfoManager {
 
     private static String TAG = "InfoManager";
 
+    private static DBAdapter mDbHelper;
+
+    public static void startDB(Context contex){
+        mDbHelper = new DBAdapter(contex);
+        mDbHelper.createDatabase();
+    }
+
     public static ArrayList<Pregunta> getPreguntas(int numeroPreguntas, ArrayList<TipoPregunta> tiposDePreguntas) {
 
         Log.d(TAG, "Obteniendo preguntas...");
 
-        // TODO Recuperar imagenes almacenadas
-
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
-        ArrayList<String> respuestas = new ArrayList<>();
-        respuestas.add("respuesta1");
-        respuestas.add("respuesta2");
-        respuestas.add("respuesta3");
-        ArrayList<Integer> soluciones = new ArrayList<>();
-        soluciones.add(0);
-        soluciones.add(1);
+        mDbHelper.open();
+        Cursor preguntasCursor = mDbHelper.getPreguntas();
 
-        preguntas.add(PreguntaFactoria.makePregunta("Pregunta factoria1", CategoriaPregunta.CIENCIAS, respuestas, soluciones ));
 
-        respuestas = new ArrayList<>();
-        respuestas.add("respuesta1");
-        respuestas.add("respuesta2");
-        respuestas.add("respuesta3");
-        soluciones = new ArrayList<>();
-        soluciones.add(2);
-        soluciones.add(1);
+        if(preguntasCursor.moveToFirst()) {
+            // Recuperar titulo
+            String title= preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo"));
+            int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
 
-        preguntas.add(PreguntaFactoria.makePregunta("Pregunta factoria2", CategoriaPregunta.CIENCIAS, respuestas, soluciones ));
+            ArrayList<String> listaRespuestas  = new ArrayList<>();
+            ArrayList<Integer> listaSoluciones = new ArrayList<>();
 
+            do {
+
+
+                // Comprobacion: si el titulo cambia, crear pregunta e inicializar los campos de la pregunta
+                if( !title.equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")))) {
+                    preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, listaSoluciones));
+
+                    listaRespuestas  = new ArrayList<>();
+                    listaSoluciones = new ArrayList<>();
+                    title = (preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")));
+
+                }
+
+                // Añadir pregunta solo si es diferente a la anterior o no hay ninguna introducida
+                if(listaSoluciones.size() == 0 || !listaSoluciones.get(listaRespuestas.size()-1).equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")))  ) {
+
+                    listaRespuestas.add(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")));
+                }
+
+                // TODO añadir respuestas
+                // Añadir respuestas solo si son direfentes a la anterior o no hay ninguna introducida anterior mente
+                listaSoluciones.add(1);
+
+                // TODO añadir categoria
+                idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
+
+            } while (preguntasCursor.moveToNext());
+
+            // Crear la ultima pregunta, una vez el cursor ya ha finalizado
+            preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, listaSoluciones));
+        }
         return preguntas;
     }
 
-    public static void updateAcierto(TipoPregunta tipo, CategoriaPregunta categoria) {
+    public static void updateAcierto(TipoPregunta tipo, int categoria) {
         //TODO Implementar
     }
 
-    public static void updateFallo(TipoPregunta tipo, CategoriaPregunta categoria) {
+    public static void updateFallo(TipoPregunta tipo, int categoria) {
         // TODO Implementar
 
     }

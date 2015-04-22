@@ -9,7 +9,7 @@ public class Pregunta {
 
     private String tituloPregunta;
     private TipoPregunta tipo;
-    private CategoriaPregunta categoria;
+    private int categoria;
 
     private ArrayList<String> respuestas;
     private ArrayList<Integer> respuestasCorrectas;
@@ -22,7 +22,7 @@ public class Pregunta {
         tipo = _nuevoTipo_;
     }
 
-    protected Pregunta(TipoPregunta _tipo_, String _titulo_, CategoriaPregunta _categoria_, ArrayList<String> _respuestas_, ArrayList<Integer> _respuestasCorrectas_) {
+    protected Pregunta(TipoPregunta _tipo_, String _titulo_, int _categoria_, ArrayList<String> _respuestas_, ArrayList<Integer> _respuestasCorrectas_) {
         // TODO
         tituloPregunta = _titulo_;
         tipo = _tipo_;
@@ -40,7 +40,7 @@ public class Pregunta {
 
     public String getTituloPregunta(){ return tituloPregunta;}
 
-    public CategoriaPregunta getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 }
