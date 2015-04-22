@@ -20,6 +20,8 @@ public class GameManager {
     // Instancia singleton
     private static GameManager instance = null;
 
+    private static int idPartida;
+
     // Variables de juego
     private TipoJuego tipoJuego;
     private ArrayList<Pregunta> listaPreguntas;
@@ -34,6 +36,9 @@ public class GameManager {
     private GameManager (TipoJuego _tipo_){
 
         tipoJuego = _tipo_;
+
+        // TODO recuperar id juego de la bd e incrementarlo
+        idPartida = 1;
 
         initGame();
     }
@@ -127,11 +132,11 @@ public class GameManager {
             Log.d(TAG, "Respuesta correcta");
             correcto = true;
             aciertosJugador++;
-            EstadisticasManager.updateAcierto(pregunta);
+            EstadisticasManager.updateAcierto(idPartida, pregunta);
         }
         else{
             Log.d(TAG, "Respuesta incorrecta");
-            EstadisticasManager.updateFallo(pregunta, respuestasPregunta);
+            EstadisticasManager.updateFallo(idPartida, pregunta, respuestasPregunta);
         }
 
         Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(correcto,respuestasPregunta);
@@ -156,4 +161,5 @@ public class GameManager {
     public Pregunta getUltimaPregunta() {
         return listaPreguntas.get(indiceJuego-1);
     }
+
 }

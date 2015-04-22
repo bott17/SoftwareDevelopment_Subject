@@ -80,12 +80,14 @@ public abstract class InfoManager {
         return preguntas;
     }
 
-    public static void updateAcierto(TipoPregunta tipo, int categoria) {
-        //TODO Implementar
+    public static void updateAcierto(int idPartida, TipoPregunta tipo, int categoria) {
+        mDbHelper.updateAcierto(idPartida, tipo, categoria);
     }
 
-    public static void updateFallo(TipoPregunta tipo, int categoria) {
-        // TODO Implementar
+    public static void updateFallo(int idPartida, TipoPregunta tipo, int categoria) {
+        mDbHelper.updateFallo(idPartida, tipo, categoria);
+
+        Log.d(TAG, "Update fallo");
 
     }
 

@@ -91,9 +91,11 @@ public class LanzadorActivity extends MyActionBarActivity {
                 // Valoracion de las respuestas, el primer campo de pair indica el resultado
                 if(gameManager.validarPregunta(preguntaActual, respuestasFalsas).first){
                     Toast.makeText(getApplicationContext(), "¡Respuesta Correcta!", Toast.LENGTH_SHORT).show();
+
                 }
-                else
+                else {
                     Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
+                }
 
                 cambiarPregunta();
             }

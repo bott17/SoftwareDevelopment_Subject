@@ -9,13 +9,13 @@ import ds.practica2.juegopreguntas.preguntas.Pregunta;
  */
 public abstract class EstadisticasManager {
 
-    public static void updateAcierto(Pregunta pregunta) {
+    public static void updateAcierto(int idPartida, Pregunta pregunta) {
 
-        InfoManager.updateAcierto(pregunta.getTipo(), pregunta.getCategoria());
+        InfoManager.updateAcierto(idPartida, pregunta.getTipo(), pregunta.getCategoria());
     }
 
-    public static void updateFallo(Pregunta pregunta, ArrayList<Integer> respuestas) {
+    public static void updateFallo(int idPartida, Pregunta pregunta, ArrayList<Integer> respuestas) {
 
-        InfoManager.updateFallo(pregunta.getTipo(), pregunta.getCategoria());
+        InfoManager.updateFallo(idPartida, pregunta.getTipo(), pregunta.getCategoria());
     }
 }

@@ -2,11 +2,15 @@ package ds.practica2.juegopreguntas.database;
 
 
 import java.io.IOException;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 
 public class DBAdapter {
 
@@ -89,6 +93,47 @@ public class DBAdapter {
                 mCur.moveToNext();
             }
             return mCur;
+        }
+        catch (SQLException mSQLException)
+        {
+            Log.e(TAG, "getTestData >>"+ mSQLException.toString());
+            throw mSQLException;
+        }
+    }
+
+    public void updateAcierto(int idPartida, TipoPregunta tipo, int categoria) {
+
+        try
+        {
+            ContentValues estadisticas = new ContentValues();
+            estadisticas.put("idjuego", idPartida);
+            estadisticas.put("idcategoria", categoria); // TODO Categoria no controlada
+            estadisticas.put("idtipo", 1);
+            estadisticas.put("acierto", 1);
+
+            mDb.insert("estadisticas", null, estadisticas);
+        }
+        catch (SQLException mSQLException)
+        {
+            Log.e(TAG, "getTestData >>"+ mSQLException.toString());
+            throw mSQLException;
+        }
+
+
+    }
+
+    public void updateFallo(int idPartida, TipoPregunta tipo, int categoria) {
+
+        try
+        {
+            ContentValues estadisticas = new ContentValues();
+            estadisticas.put("idjuego", idPartida);
+            estadisticas.put("idcategoria", categoria); // TODO Categoria no controlada
+            estadisticas.put("idtipo", 1);
+            estadisticas.put("acierto", 0);
+
+            long resultado = mDb.insert("estadisticas", null, estadisticas);
+            Log.d(TAG, "Valor updateFallo: " + resultado );
         }
         catch (SQLException mSQLException)
         {
