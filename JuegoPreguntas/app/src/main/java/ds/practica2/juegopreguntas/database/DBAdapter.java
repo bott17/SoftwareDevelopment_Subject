@@ -141,4 +141,34 @@ public class DBAdapter {
             throw mSQLException;
         }
     }
+
+    public Cursor getIdJuego() {
+
+        try
+        {
+            String sql = "select count(*) from partidas";
+
+            Cursor mCur = mDb.rawQuery(sql, null);
+            if (mCur!=null)
+            {
+                mCur.moveToNext();
+            }
+            return mCur;
+        }
+        catch (SQLException mSQLException)
+        {
+            Log.e(TAG, "getTestData >>"+ mSQLException.toString());
+            throw mSQLException;
+        }
+    }
+
+    public void addJuego(String tipoJuego) {
+
+        ContentValues juegoContent = new ContentValues();
+        juegoContent.put("tipo", tipoJuego);
+
+        long resultado = mDb.insert("partidas", null, juegoContent);
+        Log.d(TAG, "Valor updateFallo: " + resultado );
+
+    }
 }

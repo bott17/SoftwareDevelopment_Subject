@@ -38,7 +38,8 @@ public class GameManager {
         tipoJuego = _tipo_;
 
         // TODO recuperar id juego de la bd e incrementarlo
-        idPartida = 1;
+        idPartida = InfoManager.getIdJuego() + 1;
+        Log.d(TAG, "Nº partidas anteriores: " + idPartida);
 
         initGame();
     }
@@ -91,6 +92,9 @@ public class GameManager {
         */
 
         listaPreguntas = InfoManager.getPreguntas(numeroPreguntas, tiposDePreguntas);
+
+        // Registrar el juego en la BD
+        InfoManager.addJuego(tipoJuego);
     }
 
 
