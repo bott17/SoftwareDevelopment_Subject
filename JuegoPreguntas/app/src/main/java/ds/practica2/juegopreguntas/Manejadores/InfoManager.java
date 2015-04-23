@@ -3,6 +3,7 @@ package ds.practica2.juegopreguntas.manejadores;
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
+import android.util.Pair;
 
 import java.util.ArrayList;
 
@@ -44,31 +45,22 @@ public abstract class InfoManager {
             String title= preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo"));
             int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
 
-            ArrayList<String> listaRespuestas  = new ArrayList<>();
-            ArrayList<Integer> listaSoluciones = new ArrayList<>();
+            ArrayList<Pair<String, Integer> > listaRespuestas  = new ArrayList<>();
 
             do {
 
 
                 // Comprobacion: si el titulo cambia, crear pregunta e inicializar los campos de la pregunta
                 if( !title.equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")))) {
-                    preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, listaSoluciones));
+                    preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas));
 
                     listaRespuestas  = new ArrayList<>();
-                    listaSoluciones = new ArrayList<>();
                     title = (preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")));
 
                 }
 
-                // Añadir pregunta solo si es diferente a la anterior o no hay ninguna introducida
-                if(listaSoluciones.size() == 0 || !listaSoluciones.get(listaRespuestas.size()-1).equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")))  ) {
-
-                    listaRespuestas.add(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")));
-                }
-
-                // TODO añadir respuestas
-                // Añadir respuestas solo si son direfentes a la anterior o no hay ninguna introducida anterior mente
-                listaSoluciones.add(1);
+                // Aniando preguntas
+                listaRespuestas.add(new Pair<String, Integer>(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")), preguntasCursor.getInt(preguntasCursor.getColumnIndex("correcta"))));
 
                 // TODO añadir categoria
                 idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
@@ -76,7 +68,7 @@ public abstract class InfoManager {
             } while (preguntasCursor.moveToNext());
 
             // Crear la ultima pregunta, una vez el cursor ya ha finalizado
-            preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, listaSoluciones));
+            preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas));
         }
         return preguntas;
     }

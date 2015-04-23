@@ -123,27 +123,10 @@ public class GameManager {
      */
     public Pair<Boolean, ArrayList<Integer> > validarPregunta(Pregunta pregunta, ArrayList<Integer> respuestas){
 
+        // TODO Implementar
         boolean correcto = false;
+        Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(true, new ArrayList<Integer>());
 
-        ArrayList<Integer> respuestasPregunta = new ArrayList<>(pregunta.getRespuestas());
-
-        for(Integer respuesta: respuestas){
-            if(respuestasPregunta.contains(respuesta))
-                respuestasPregunta.remove(respuesta);
-        }
-
-        if(respuestasPregunta.size() == 0 && pregunta.getRespuestas().size() == respuestas.size()){
-            Log.d(TAG, "Respuesta correcta");
-            correcto = true;
-            aciertosJugador++;
-            EstadisticasManager.updateAcierto(idPartida, pregunta);
-        }
-        else{
-            Log.d(TAG, "Respuesta incorrecta");
-            EstadisticasManager.updateFallo(idPartida, pregunta, respuestasPregunta);
-        }
-
-        Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(correcto,respuestasPregunta);
 
         return resultado;
 
