@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.Estadisticas;
 import ds.practica2.juegopreguntas.database.DBAdapter;
+import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.preguntas.CategoriaPregunta;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
@@ -97,5 +98,18 @@ public abstract class InfoManager {
         Estadisticas estadisticas = new Estadisticas();
         return estadisticas;
 
+    }
+
+    public static int getIdJuego() {
+
+        Cursor resultado = mDbHelper.getIdJuego();
+
+        return resultado.getInt(resultado.getColumnIndex("count(*)"));
+    }
+
+    public static void addJuego(TipoJuego tipoJuego) {
+
+        // TODO aniadir tipo de juego
+        mDbHelper.addJuego("NA");
     }
 }
