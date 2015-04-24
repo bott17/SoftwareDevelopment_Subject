@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="pregunta2"
-        android:id="@+id/button2"
+        android:id="@+id/botonpregunta2"
         android:layout_below="@+id/botonPregunta1"
         android:layout_alignStart="@+id/botonPregunta1" />
 
@@ -63,8 +63,8 @@
         android:layout_height="wrap_content"
         android:text="pregunta3"
         android:id="@+id/botonPregunta3"
-        android:layout_below="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
+        android:layout_below="@+id/botonpregunta2"
+        android:layout_alignStart="@+id/botonpregunta2" />
 
     <Button
         android:layout_width="wrap_content"
