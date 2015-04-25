@@ -1,3 +1,2 @@
-select titulo, respuesta, solucion, idcategoria from preguntas 
-left JOIN respuestas on idpregunta=idres 
-left join soluciones on idpregunta=idsol
+select titulo, respuesta,correcta,idcategoria,dificultad from preguntas 
+left JOIN respuestas on preguntas.rowid=idpregunta

@@ -1,6 +1,12 @@
 package ds.practica2.juegopreguntas.preguntas;
 
+import android.util.Pair;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
+import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
 /**
  * Created by bott1 on 14/04/2015.
@@ -10,9 +16,10 @@ public class Pregunta {
     private String tituloPregunta;
     private TipoPregunta tipo;
     private int categoria;
+    private TipoRespuestas tipoRespuestas;
+    private int dificultad;
 
-    private ArrayList<String> respuestas;
-    private ArrayList<Integer> respuestasCorrectas;
+    private ArrayList<Pair<String, Integer> > respuestas;
 
 
     // TODO eliminar deprecated
@@ -22,18 +29,21 @@ public class Pregunta {
         tipo = _nuevoTipo_;
     }
 
-    protected Pregunta(TipoPregunta _tipo_, String _titulo_, int _categoria_, ArrayList<String> _respuestas_, ArrayList<Integer> _respuestasCorrectas_) {
-        // TODO
+    protected Pregunta(TipoPregunta _tipo_, String _titulo_, int _categoria_, ArrayList<Pair<String, Integer> > _respuestas_, int _dificultad_) {
+
         tituloPregunta = _titulo_;
         tipo = _tipo_;
         categoria = _categoria_;
         respuestas = new ArrayList<>(_respuestas_);
-        respuestasCorrectas = new ArrayList<>(_respuestasCorrectas_);
+        // TODO recuperar tipo respuesta d ela base de datos
+        tipoRespuestas = TipoRespuestas.SIMPLE;
+        dificultad = _dificultad_;
 
-    }
 
-    public ArrayList<Integer> getRespuestas() {
-        return respuestasCorrectas;
+
+        // Barajar preguntas para cambiar el orden
+        Collections.shuffle(respuestas);
+
     }
 
     public TipoPregunta getTipo(){ return tipo;}
@@ -42,5 +52,24 @@ public class Pregunta {
 
     public int getCategoria() {
         return categoria;
+    }
+
+    public boolean getSolucionRespuesta(int indexRespuesta){
+
+        return respuestas.get(indexRespuesta).second != 0 ; // Conversion integer to boolean
+    }
+
+    /**
+     * Devuelve que tipo de respuesta hay que dar para contestar la pregunta
+     * @return Tipo de respuesta que necesita la pregunta. (Multiple, simple....)
+     */
+    public TipoRespuestas getTipoRespuestas() { return tipoRespuestas;}
+
+    public ArrayList<Pair<String, Integer>> getRespuestas() {
+        return respuestas;
+    }
+
+    public int getDificultad() {
+        return dificultad;
     }
 }

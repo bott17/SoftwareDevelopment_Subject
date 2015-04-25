@@ -85,7 +85,7 @@ public class DBAdapter {
 
         try
         {
-            String sql ="select titulo, respuesta, solucion, idcategoria from preguntas left JOIN respuestas on idpregunta=idres left join soluciones on idpregunta=idsol";
+            String sql ="select titulo, idcategoria, respuesta,dificultad, correcta from preguntas left JOIN respuestas on preguntas.rowid=idpregunta";
 
             Cursor mCur = mDb.rawQuery(sql, null);
             if (mCur!=null)

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
+import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
 /**
  * Created by bott1 on 14/04/2015.
@@ -118,32 +119,25 @@ public class GameManager {
     /**
      * Devuelve el resultado de la evaluación de la pregunta, incluyendo las respuestas que no se marcaron correctamente
      * @param pregunta Pregunta a evaluar
-     * @param respuestas Respuestas a evaluar
+     * @param indexSeleccionadas Indice de las respuestas seleccionadas
      * @return Pair con el primer campo que indica el resultado, en el segundo las respuestas correctas sin acertar
      */
-    public Pair<Boolean, ArrayList<Integer> > validarPregunta(Pregunta pregunta, ArrayList<Integer> respuestas){
+    public Pair<Boolean, ArrayList<Integer> > validarPregunta(Pregunta pregunta, ArrayList<Integer> indexSeleccionadas){
 
         boolean correcto = false;
+        Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(false, indexSeleccionadas);
 
-        ArrayList<Integer> respuestasPregunta = new ArrayList<>(pregunta.getRespuestas());
+        // TODO Implementar Multirespuesta
+        if(pregunta.getTipoRespuestas() == TipoRespuestas.MULTIPLE){
 
-        for(Integer respuesta: respuestas){
-            if(respuestasPregunta.contains(respuesta))
-                respuestasPregunta.remove(respuesta);
+        }
+        else if(pregunta.getTipoRespuestas() == TipoRespuestas.SIMPLE) {
+
+            // Si la respuesta seleccionada es TRUE, entonces acerto la pregunta
+            correcto = pregunta.getSolucionRespuesta(indexSeleccionadas.get(0));
+            resultado = new Pair<>(correcto, indexSeleccionadas);
         }
 
-        if(respuestasPregunta.size() == 0 && pregunta.getRespuestas().size() == respuestas.size()){
-            Log.d(TAG, "Respuesta correcta");
-            correcto = true;
-            aciertosJugador++;
-            EstadisticasManager.updateAcierto(idPartida, pregunta);
-        }
-        else{
-            Log.d(TAG, "Respuesta incorrecta");
-            EstadisticasManager.updateFallo(idPartida, pregunta, respuestasPregunta);
-        }
-
-        Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(correcto,respuestasPregunta);
 
         return resultado;
 

@@ -1,5 +1,7 @@
 package ds.practica2.juegopreguntas.preguntas;
 
+import android.util.Pair;
+
 import java.util.ArrayList;
 
 /**
@@ -10,8 +12,8 @@ public class PreguntaMultimedia extends Pregunta {
     private String refMultimedia;
 
 
-    protected PreguntaMultimedia(TipoPregunta tipo, String titulo, int categoria, ArrayList<String> respuestas, ArrayList<Integer> respuestasCorrectas, String _refMultimedia_) {
-        super(tipo, titulo, categoria, respuestas, respuestasCorrectas);
+    protected PreguntaMultimedia(TipoPregunta tipo, String titulo, int categoria, ArrayList<Pair<String, Integer>> respuestas, String _refMultimedia_, int dificultad) {
+        super(tipo, titulo, categoria, respuestas, dificultad);
 
         refMultimedia = _refMultimedia_;
     }
