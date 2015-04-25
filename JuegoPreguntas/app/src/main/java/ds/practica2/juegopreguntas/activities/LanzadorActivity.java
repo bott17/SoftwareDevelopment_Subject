@@ -26,7 +26,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     // Elementos visuales
     private Button botonPrincipal, botonPregunta, botonResponder;
     private Button botonRespuesta1, botonRespuesta2, botonRespuesta3, botonRespuesta4;
-    private TextView textTituloPregunta;
+    private TextView textTituloPregunta, textDificultad;
 
     // Referencias
     private static final int BUTTON_TAG = 0;
@@ -68,6 +68,7 @@ public class LanzadorActivity extends MyActionBarActivity {
         gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
 
         textTituloPregunta = (TextView) findViewById(R.id.textTituloPregunta);
+        textDificultad = (TextView)findViewById(R.id.textViewDificultad);
 
         botonPrincipal = (Button) findViewById(R.id.bottonPrincipal);
         botonPrincipal.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +79,7 @@ public class LanzadorActivity extends MyActionBarActivity {
             }
         });
 
-        botonPregunta = (Button) findViewById(R.id.botonPregunta);
+       /* botonPregunta = (Button) findViewById(R.id.botonPregunta);
         botonPregunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +89,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
 
         botonResponder = (Button) findViewById(R.id.botoContestar);
-        /*botonResponder.setOnClickListener(new View.OnClickListener() {
+        botonResponder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ArrayList<Integer> respuestasFalsas = new ArrayList<Integer>();
@@ -118,7 +119,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
                 // En caso de multirespuesta
                 if(preguntaActual.getTipoRespuestas() == TipoRespuestas.MULTIPLE){
-                    // TODO Implentar
+                    // TODO Implentar. Se podria hacer en otro listener diferente
                 }
                 // En caso de respuesta unica
                 else if(preguntaActual.getTipoRespuestas() == TipoRespuestas.SIMPLE){
@@ -202,6 +203,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
             textTituloPregunta.setText(preguntaActual.getTituloPregunta());
+            textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
 
             botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
             botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);

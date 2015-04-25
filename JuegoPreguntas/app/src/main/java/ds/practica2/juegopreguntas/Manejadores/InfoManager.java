@@ -44,6 +44,7 @@ public abstract class InfoManager {
             // Recuperar titulo
             String title= preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo"));
             int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
+            int dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex("dificultad"));
 
             ArrayList<Pair<String, Integer> > listaRespuestas  = new ArrayList<>();
 
@@ -52,7 +53,7 @@ public abstract class InfoManager {
 
                 // Comprobacion: si el titulo cambia, crear pregunta e inicializar los campos de la pregunta
                 if( !title.equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")))) {
-                    preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas));
+                    preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, dificultad));
 
                     listaRespuestas  = new ArrayList<>();
                     title = (preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")));
@@ -64,11 +65,12 @@ public abstract class InfoManager {
 
                 // TODO añadir categoria
                 idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
+                dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex("dificultad"));
 
             } while (preguntasCursor.moveToNext());
 
             // Crear la ultima pregunta, una vez el cursor ya ha finalizado
-            preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas));
+            preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, dificultad));
         }
         return preguntas;
     }

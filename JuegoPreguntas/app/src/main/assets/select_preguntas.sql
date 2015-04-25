@@ -1,2 +1,2 @@
-select titulo, respuesta,correcta,idcategoria from preguntas 
+select titulo, respuesta,correcta,idcategoria,dificultad from preguntas 
 left JOIN respuestas on preguntas.rowid=idpregunta

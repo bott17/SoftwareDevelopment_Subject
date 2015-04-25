@@ -74,4 +74,13 @@
         android:layout_below="@+id/botonPregunta3"
         android:layout_alignStart="@+id/botonPregunta3" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="dificultad"
+        android:id="@+id/textViewDificultad"
+        android:layout_alignBottom="@+id/bottonPrincipal"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

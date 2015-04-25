@@ -17,6 +17,7 @@ public class Pregunta {
     private TipoPregunta tipo;
     private int categoria;
     private TipoRespuestas tipoRespuestas;
+    private int dificultad;
 
     private ArrayList<Pair<String, Integer> > respuestas;
 
@@ -28,26 +29,22 @@ public class Pregunta {
         tipo = _nuevoTipo_;
     }
 
-    protected Pregunta(TipoPregunta _tipo_, String _titulo_, int _categoria_, ArrayList<Pair<String, Integer> > _respuestas_) {
-        // TODO
+    protected Pregunta(TipoPregunta _tipo_, String _titulo_, int _categoria_, ArrayList<Pair<String, Integer> > _respuestas_, int _dificultad_) {
+
         tituloPregunta = _titulo_;
         tipo = _tipo_;
         categoria = _categoria_;
         respuestas = new ArrayList<>(_respuestas_);
         // TODO recuperar tipo respuesta d ela base de datos
         tipoRespuestas = TipoRespuestas.SIMPLE;
+        dificultad = _dificultad_;
+
 
 
         // Barajar preguntas para cambiar el orden
         Collections.shuffle(respuestas);
 
     }
-
-    /*
-    public ArrayList<Integer> getRespuestas() {
-        return respuestasCorrectas;
-    }
-    */
 
     public TipoPregunta getTipo(){ return tipo;}
 
@@ -70,5 +67,9 @@ public class Pregunta {
 
     public ArrayList<Pair<String, Integer>> getRespuestas() {
         return respuestas;
+    }
+
+    public int getDificultad() {
+        return dificultad;
     }
 }

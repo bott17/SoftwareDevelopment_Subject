@@ -18,9 +18,9 @@ public abstract class PreguntaFactoria {
      * @param respuestas Lista de todas las respuestas, cada una indica si es verdadera o falsa
      * @return Pregunta
      */
-    public static Pregunta makePregunta( String titulo, int categoria, ArrayList<Pair<String, Integer>> respuestas){
+    public static Pregunta makePregunta( String titulo, int categoria, ArrayList<Pair<String, Integer>> respuestas, int dificultad){
 
-        Pregunta pregunta = new Pregunta(TipoPregunta.DEFAULT, titulo, categoria, respuestas);
+        Pregunta pregunta = new Pregunta(TipoPregunta.DEFAULT, titulo, categoria, respuestas, dificultad);
         return pregunta;
 
     }
@@ -35,9 +35,9 @@ public abstract class PreguntaFactoria {
      * @return Pregunta de tipo multimedia
      */
     public static PreguntaMultimedia makePreguntaMultimedia(TipoPregunta tipoPregunta, String titulo, int categoria,
-                                                            ArrayList<Pair<String, Integer> > respuestas, String refMultimedia){
+                                                            ArrayList<Pair<String, Integer> > respuestas, String refMultimedia, int dificultad){
 
-        PreguntaMultimedia pregunta = new PreguntaMultimedia(tipoPregunta, titulo, categoria, respuestas, refMultimedia);
+        PreguntaMultimedia pregunta = new PreguntaMultimedia(tipoPregunta, titulo, categoria, respuestas, refMultimedia, dificultad);
         return pregunta;
     }
 }
