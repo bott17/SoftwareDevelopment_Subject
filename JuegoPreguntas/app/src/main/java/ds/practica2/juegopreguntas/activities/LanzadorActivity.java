@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
@@ -64,6 +65,9 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     @Override
     protected void initComponents() {
+
+        // Cargando los sonidos
+        SonidoManager.load(getApplicationContext());
 
         gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
 
@@ -143,9 +147,11 @@ public class LanzadorActivity extends MyActionBarActivity {
 
                     if(gameManager.validarPregunta(preguntaActual, respuestasSeleccionadas).first) {
                         Toast.makeText(getApplicationContext(), "¡Respuesta Correcta!", Toast.LENGTH_SHORT).show();
+                        sonidoResultado(true);
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
+                        sonidoResultado(false);
                     }
                 }
 
@@ -169,6 +175,11 @@ public class LanzadorActivity extends MyActionBarActivity {
         botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
 
 
+    }
+
+    private void sonidoResultado(boolean acierto) {
+
+        SonidoManager.reproducirResultado(acierto);
     }
 
     private void cambiarPregunta(){
