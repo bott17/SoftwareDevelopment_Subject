@@ -3,10 +3,12 @@ package ds.practica2.juegopreguntas.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +27,14 @@ public class LanzadorActivity extends MyActionBarActivity {
     private static final String TAG = "LanzadorActivity";
 
     // Elementos visuales
-    private Button botonPrincipal, botonPregunta, botonResponder;
+    private static LinearLayout marco;
+    private Button botonPrincipal;
     private Button botonRespuesta1, botonRespuesta2, botonRespuesta3, botonRespuesta4;
     private TextView textTituloPregunta, textDificultad;
 
+    View.OnClickListener seleccionarRespuestaListener;
+
     // Referencias
-    private static final int BUTTON_TAG = 0;
     private static final int respuesta1 = 1;
     private static final int respuesta2 = 2;
     private static final int respuesta3 = 3;
@@ -83,39 +87,10 @@ public class LanzadorActivity extends MyActionBarActivity {
             }
         });
 
-       /* botonPregunta = (Button) findViewById(R.id.botonPregunta);
-        botonPregunta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cambiarPregunta();
-            }
-        });
-
-
-        botonResponder = (Button) findViewById(R.id.botoContestar);
-        botonResponder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<Integer> respuestasFalsas = new ArrayList<Integer>();
-                respuestasFalsas.add(0);
-                respuestasFalsas.add(1);
-
-                // Valoracion de las respuestas, el primer campo de pair indica el resultado
-                if(gameManager.validarPregunta(preguntaActual, respuestasFalsas).first){
-                    Toast.makeText(getApplicationContext(), "¡Respuesta Correcta!", Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
-                }
-
-                cambiarPregunta();
-            }
-        });*/
-
+        marco = (LinearLayout)findViewById(R.id.layoutMarco);
 
         // Listener de los botones de respuestas
-        View.OnClickListener seleccionarRespuestaListener = new View.OnClickListener() {
+        seleccionarRespuestaListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -159,20 +134,7 @@ public class LanzadorActivity extends MyActionBarActivity {
             }
         };
 
-        // Aniandiendo tags identificativos
-        botonRespuesta1 = (Button)findViewById(R.id.botonPregunta1);
-        botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
-        botonRespuesta2 = (Button)findViewById(R.id.botonpregunta2);
-        botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
-        botonRespuesta3 = (Button)findViewById(R.id.botonPregunta3);
-        botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
-        botonRespuesta4 = (Button)findViewById(R.id.botonPregunta4);
-        botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
 
-        botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
 
 
     }
@@ -212,22 +174,49 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void obtenerDatosPregunta(Pregunta pregunta){
 
-        if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT) || preguntaActual.getTipo().equals(TipoPregunta.SONIDO)) {
+        marco.removeAllViewsInLayout();
 
-            if(preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)){
-                Log.d(TAG, "Pregunta default");
+        textTituloPregunta.setText(preguntaActual.getTituloPregunta());
+        textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
+
+        View viewPreguntas;
+
+        if(preguntaActual.getTipo().equals(TipoPregunta.DEFAULT) || preguntaActual.getTipo().equals(TipoPregunta.SONIDO)) {
+
+            if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
+
+                viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_estandar, null, false);
+
+
+            } else{
+
+                viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
+
+
             }
-            else if(preguntaActual.getTipo().equals(TipoPregunta.SONIDO)){
-                Log.d(TAG, "Pregunta sonido");
-            }
-            textTituloPregunta.setText(preguntaActual.getTituloPregunta());
-            textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
+
+            marco.addView(viewPreguntas);
+
+            // Aniandiendo tags identificativos
+            botonRespuesta1 = (Button) findViewById(R.id.botonPregunta1);
+            botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
+            botonRespuesta2 = (Button) findViewById(R.id.botonpregunta2);
+            botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
+            botonRespuesta3 = (Button) findViewById(R.id.botonPregunta3);
+            botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
+            botonRespuesta4 = (Button) findViewById(R.id.botonPregunta4);
+            botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
+
+            botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
+            botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
+            botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
+            botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
+
 
             botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
             botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
             botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
             botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
-
         }
     }
 
