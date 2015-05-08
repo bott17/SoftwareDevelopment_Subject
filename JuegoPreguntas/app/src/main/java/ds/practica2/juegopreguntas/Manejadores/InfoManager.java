@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import ds.practica2.juegopreguntas.Estadisticas;
 import ds.practica2.juegopreguntas.database.DBAdapter;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
-import ds.practica2.juegopreguntas.preguntas.CategoriaPregunta;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
-import ds.practica2.juegopreguntas.preguntas.PreguntaTexto;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 
 /**
@@ -72,7 +70,7 @@ public abstract  class InfoManager {
                     else{
 
                         int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
-                        preguntas.add(PreguntaFactoria.makePreguntaMultimedia(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
+                        preguntas.add(PreguntaFactoria.makePreguntaSonido(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
                     }
 
 
@@ -99,7 +97,7 @@ public abstract  class InfoManager {
             }
             else{
                 int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
-                preguntas.add(PreguntaFactoria.makePreguntaMultimedia(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
+                preguntas.add(PreguntaFactoria.makePreguntaSonido(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
             }
         }
         return preguntas;

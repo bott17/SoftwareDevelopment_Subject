@@ -1,7 +1,6 @@
 package ds.practica2.juegopreguntas.activities;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -23,7 +22,7 @@ import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
-import ds.practica2.juegopreguntas.preguntas.PreguntaMultimedia;
+import ds.practica2.juegopreguntas.preguntas.PreguntaSonido;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
@@ -207,7 +206,7 @@ public class LanzadorActivity extends MyActionBarActivity {
                 viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
                 marco.addView(viewPreguntas);
 
-                SonidoManager.cargarSonido(((PreguntaMultimedia)pregunta).getRefMultimedia());
+                SonidoManager.cargarSonido(((PreguntaSonido)pregunta).getRefMultimedia());
 
 
                 toggleButtonPlay = (ToggleButton)findViewById(R.id.botonTogglePlay);
