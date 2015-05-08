@@ -72,7 +72,7 @@ public abstract  class InfoManager {
                     else{
 
                         int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
-                        preguntas.add(PreguntaFactoria.makePreguntaMultimedia(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, Integer.toString(dificultad), idResource));
+                        preguntas.add(PreguntaFactoria.makePreguntaMultimedia(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
                     }
 
 
@@ -99,7 +99,7 @@ public abstract  class InfoManager {
             }
             else{
                 int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
-                preguntas.add(PreguntaFactoria.makePreguntaMultimedia(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, Integer.toString(dificultad), idResource));
+                preguntas.add(PreguntaFactoria.makePreguntaMultimedia(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
             }
         }
         return preguntas;

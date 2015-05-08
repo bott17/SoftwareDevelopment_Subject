@@ -35,7 +35,7 @@ public abstract class PreguntaFactoria {
      * @return Pregunta de tipo multimedia
      */
     public static PreguntaMultimedia makePreguntaMultimedia(TipoPregunta tipoPregunta, String titulo, int categoria,
-                                                            ArrayList<Pair<String, Integer> > respuestas, String refMultimedia, int dificultad){
+                                                            ArrayList<Pair<String, Integer> > respuestas, int refMultimedia, int dificultad){
 
         PreguntaMultimedia pregunta = new PreguntaMultimedia(tipoPregunta, titulo, categoria, respuestas, refMultimedia, dificultad);
         return pregunta;

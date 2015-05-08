@@ -1,6 +1,7 @@
 package ds.practica2.juegopreguntas.activities;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
+import ds.practica2.juegopreguntas.preguntas.PreguntaMultimedia;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
@@ -191,6 +193,10 @@ public class LanzadorActivity extends MyActionBarActivity {
             } else{
 
                 viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
+
+                int  idRecurso = ((PreguntaMultimedia)pregunta).getRefMultimedia();
+                //int idResource = this.getResources().getIdentifier(recurso, "raw", this.getPackageName());
+                MediaPlayer mediaPlayer = MediaPlayer.create(this, idRecurso);
 
 
             }
