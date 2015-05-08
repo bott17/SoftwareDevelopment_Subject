@@ -7,18 +7,18 @@ import java.util.ArrayList;
 /**
  * Created by bott1 on 16/04/2015.
  */
-public class PreguntaMultimedia extends Pregunta {
+public class PreguntaSonido extends Pregunta {
 
-    private String refMultimedia;
+    private int refMultimedia;
 
 
-    protected PreguntaMultimedia(TipoPregunta tipo, String titulo, int categoria, ArrayList<Pair<String, Integer>> respuestas, String _refMultimedia_, int dificultad) {
+    protected PreguntaSonido(TipoPregunta tipo, String titulo, int categoria, ArrayList<Pair<String, Integer>> respuestas, int _refMultimedia_, int dificultad) {
         super(tipo, titulo, categoria, respuestas, dificultad);
 
         refMultimedia = _refMultimedia_;
     }
 
-    public String getRefMultimedia(){
+    public int getRefMultimedia(){
         return refMultimedia;
     }
 }

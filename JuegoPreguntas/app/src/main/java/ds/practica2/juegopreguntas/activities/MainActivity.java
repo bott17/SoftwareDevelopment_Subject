@@ -27,15 +27,17 @@ public class MainActivity extends MyActionBarActivity {
 
         initComponents();
 
-        //testDB();
 
-        testInfomanager();
+        // TODO Eliminar
+        //testDB();
+        //testInfomanager();
     }
+
 
     private void testInfomanager() {
 
         InfoManager.startDB(getApplicationContext());
-        InfoManager.getPreguntas(1, null);
+        InfoManager.getPreguntas(getApplicationContext(),1, null);
     }
 
     public void testDB(){

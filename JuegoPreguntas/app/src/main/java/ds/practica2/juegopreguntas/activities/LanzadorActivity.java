@@ -2,13 +2,19 @@ package ds.practica2.juegopreguntas.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -16,21 +22,32 @@ import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
+import ds.practica2.juegopreguntas.preguntas.PreguntaSonido;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
+
 
 public class LanzadorActivity extends MyActionBarActivity {
 
     private static final String TAG = "LanzadorActivity";
 
+    // Elementos del reproductor
+    private Handler durationHandler = new Handler();
+    private double timeElapsed = 0, finalTime = 0;
+
     // Elementos visuales
-    private Button botonPrincipal, botonPregunta, botonResponder;
+    private static LinearLayout marco;
+    private Button botonPrincipal;
     private Button botonRespuesta1, botonRespuesta2, botonRespuesta3, botonRespuesta4;
     private TextView textTituloPregunta, textDificultad;
+    ToggleButton toggleButtonPlay;
+    ImageView botonParar;
+    SeekBar seekBar;
+
+    View.OnClickListener seleccionarRespuestaListener;
 
     // Referencias
-    private static final int BUTTON_TAG = 0;
     private static final int respuesta1 = 1;
     private static final int respuesta2 = 2;
     private static final int respuesta3 = 3;
@@ -69,7 +86,7 @@ public class LanzadorActivity extends MyActionBarActivity {
         // Cargando los sonidos
         SonidoManager.load(getApplicationContext());
 
-        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
+        gameManager = GameManager.getInstance(getApplicationContext(), TipoJuego.DEFAULT);
 
         textTituloPregunta = (TextView) findViewById(R.id.textTituloPregunta);
         textDificultad = (TextView)findViewById(R.id.textViewDificultad);
@@ -83,39 +100,10 @@ public class LanzadorActivity extends MyActionBarActivity {
             }
         });
 
-       /* botonPregunta = (Button) findViewById(R.id.botonPregunta);
-        botonPregunta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cambiarPregunta();
-            }
-        });
-
-
-        botonResponder = (Button) findViewById(R.id.botoContestar);
-        botonResponder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ArrayList<Integer> respuestasFalsas = new ArrayList<Integer>();
-                respuestasFalsas.add(0);
-                respuestasFalsas.add(1);
-
-                // Valoracion de las respuestas, el primer campo de pair indica el resultado
-                if(gameManager.validarPregunta(preguntaActual, respuestasFalsas).first){
-                    Toast.makeText(getApplicationContext(), "¡Respuesta Correcta!", Toast.LENGTH_SHORT).show();
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
-                }
-
-                cambiarPregunta();
-            }
-        });*/
-
+        marco = (LinearLayout)findViewById(R.id.layoutMarco);
 
         // Listener de los botones de respuestas
-        View.OnClickListener seleccionarRespuestaListener = new View.OnClickListener() {
+        seleccionarRespuestaListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -159,20 +147,7 @@ public class LanzadorActivity extends MyActionBarActivity {
             }
         };
 
-        // Aniandiendo tags identificativos
-        botonRespuesta1 = (Button)findViewById(R.id.botonPregunta1);
-        botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
-        botonRespuesta2 = (Button)findViewById(R.id.botonpregunta2);
-        botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
-        botonRespuesta3 = (Button)findViewById(R.id.botonPregunta3);
-        botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
-        botonRespuesta4 = (Button)findViewById(R.id.botonPregunta4);
-        botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
 
-        botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
 
 
     }
@@ -203,7 +178,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void resumeGame() {
 
-        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
+        gameManager = GameManager.getInstance(getApplicationContext(), TipoJuego.DEFAULT);
         preguntaActual = gameManager.getUltimaPregunta();
 
         obtenerDatosPregunta(preguntaActual);
@@ -212,17 +187,98 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void obtenerDatosPregunta(Pregunta pregunta){
 
-        if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
-            textTituloPregunta.setText(preguntaActual.getTituloPregunta());
-            textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
+        marco.removeAllViewsInLayout();
 
-            botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
-            botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
-            botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
-            botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
+        textTituloPregunta.setText(preguntaActual.getTituloPregunta());
+        textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
+
+        View viewPreguntas;
+
+        if(preguntaActual.getTipo().equals(TipoPregunta.DEFAULT) || preguntaActual.getTipo().equals(TipoPregunta.SONIDO)) {
+
+            if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
+
+                viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_estandar, null, false);
+                marco.addView(viewPreguntas);
+
+            } else{
+
+                viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
+                marco.addView(viewPreguntas);
+
+                SonidoManager.cargarSonido(((PreguntaSonido)pregunta).getRefMultimedia());
+
+
+                toggleButtonPlay = (ToggleButton)findViewById(R.id.botonTogglePlay);
+                toggleButtonPlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (toggleButtonPlay.isChecked()) { // Checked - Pause icon visible
+                            SonidoManager.reproducirSonido();
+                            timeElapsed = SonidoManager.getCurrentPosition();
+                            seekBar.setProgress((int) timeElapsed);
+                            durationHandler.postDelayed(updateSeekBarTime, 100);
+                        } else { // Unchecked - Play icon visible
+                           SonidoManager.pausarSonido();
+                        }
+                    }
+                });
+
+                botonParar = (ImageView)findViewById(R.id.botonImagenStop);
+                botonParar.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                       SonidoManager.pararSonido();
+                        toggleButtonPlay.setChecked(false);
+                    }
+                });
+
+                seekBar = (SeekBar) findViewById(R.id.seekBar);
+                seekBar.setMax(SonidoManager.getDuration());
+                seekBar.setClickable(false);
+
+
+            }
+
+
+
 
         }
+
+        // Aniandiendo tags identificativos
+        botonRespuesta1 = (Button) findViewById(R.id.botonPregunta1);
+        botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
+        botonRespuesta2 = (Button) findViewById(R.id.botonpregunta2);
+        botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
+        botonRespuesta3 = (Button) findViewById(R.id.botonPregunta3);
+        botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
+        botonRespuesta4 = (Button) findViewById(R.id.botonPregunta4);
+        botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
+
+        botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
+        botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
+        botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
+        botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
+
+
+        botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
+        botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
+        botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
+        botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
     }
+
+    //handler to change seekBarTime
+    private Runnable updateSeekBarTime = new Runnable() {
+        public void run() {
+            //get current position
+            double timeElapsed = SonidoManager.getCurrentPosition();
+            //set seekbar progress
+            seekBar.setProgress((int) timeElapsed);
+
+            //repeat yourself that again in 100 miliseconds
+            durationHandler.postDelayed(this, 100);
+        }
+    };
 
 
     @Override
@@ -245,5 +301,12 @@ public class LanzadorActivity extends MyActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SonidoManager.pararSonido();
     }
 }

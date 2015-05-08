@@ -1,5 +1,6 @@
 package ds.practica2.juegopreguntas.manejadores;
 
+import android.content.Context;
 import android.util.Log;
 import android.util.Pair;
 
@@ -22,6 +23,7 @@ public class GameManager {
     private static GameManager instance = null;
 
     private static int idPartida;
+    private Context context;
 
     // Variables de juego
     private TipoJuego tipoJuego;
@@ -34,9 +36,12 @@ public class GameManager {
      * Inicia un juego del tipo especificado. Puede ser Default
      * @param _tipo_ Tipo de juego especificado en TipoJuego
      */
-    private GameManager (TipoJuego _tipo_){
+    private GameManager (TipoJuego _tipo_, Context _context_){
 
         tipoJuego = _tipo_;
+        context = _context_;
+
+        InfoManager.startDB(context);
 
         // TODO recuperar id juego de la bd e incrementarlo
         idPartida = InfoManager.getIdJuego() + 1;
@@ -50,10 +55,10 @@ public class GameManager {
      * @param _tipo_ Tipo de juego elegido, definido en TipoJuego
      * @return Instancia del juego
      */
-    public static GameManager getInstance (TipoJuego _tipo_){
+    public static GameManager getInstance (Context _context_, TipoJuego _tipo_){
 
         if(instance == null){
-            instance = new GameManager(_tipo_);
+            instance = new GameManager(_tipo_, _context_);
         }
 
         return instance;
@@ -92,7 +97,7 @@ public class GameManager {
             }
         */
 
-        listaPreguntas = InfoManager.getPreguntas(numeroPreguntas, tiposDePreguntas);
+        listaPreguntas = InfoManager.getPreguntas(context, numeroPreguntas, tiposDePreguntas);
 
         // Registrar el juego en la BD
         InfoManager.addJuego(tipoJuego);

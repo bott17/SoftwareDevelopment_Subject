@@ -34,10 +34,10 @@ public abstract class PreguntaFactoria {
      * @param refMultimedia Referencia del recurso multimedia.
      * @return Pregunta de tipo multimedia
      */
-    public static PreguntaMultimedia makePreguntaMultimedia(TipoPregunta tipoPregunta, String titulo, int categoria,
-                                                            ArrayList<Pair<String, Integer> > respuestas, String refMultimedia, int dificultad){
+    public static PreguntaSonido makePreguntaSonido(TipoPregunta tipoPregunta, String titulo, int categoria,
+                                                    ArrayList<Pair<String, Integer>> respuestas, int refMultimedia, int dificultad){
 
-        PreguntaMultimedia pregunta = new PreguntaMultimedia(tipoPregunta, titulo, categoria, respuestas, refMultimedia, dificultad);
+        PreguntaSonido pregunta = new PreguntaSonido(tipoPregunta, titulo, categoria, respuestas, refMultimedia, dificultad);
         return pregunta;
     }
 }
