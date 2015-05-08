@@ -69,7 +69,7 @@ public class LanzadorActivity extends MyActionBarActivity {
         // Cargando los sonidos
         SonidoManager.load(getApplicationContext());
 
-        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
+        gameManager = GameManager.getInstance(getApplicationContext(), TipoJuego.DEFAULT);
 
         textTituloPregunta = (TextView) findViewById(R.id.textTituloPregunta);
         textDificultad = (TextView)findViewById(R.id.textViewDificultad);
@@ -203,7 +203,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void resumeGame() {
 
-        gameManager = GameManager.getInstance(TipoJuego.DEFAULT);
+        gameManager = GameManager.getInstance(getApplicationContext(), TipoJuego.DEFAULT);
         preguntaActual = gameManager.getUltimaPregunta();
 
         obtenerDatosPregunta(preguntaActual);
@@ -212,7 +212,14 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void obtenerDatosPregunta(Pregunta pregunta){
 
-        if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
+        if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT) || preguntaActual.getTipo().equals(TipoPregunta.SONIDO)) {
+
+            if(preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)){
+                Log.d(TAG, "Pregunta default");
+            }
+            else if(preguntaActual.getTipo().equals(TipoPregunta.SONIDO)){
+                Log.d(TAG, "Pregunta sonido");
+            }
             textTituloPregunta.setText(preguntaActual.getTituloPregunta());
             textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
 
