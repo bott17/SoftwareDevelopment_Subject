@@ -41,7 +41,7 @@ public class GameManager {
         tipoJuego = _tipo_;
         context = _context_;
 
-        InfoManager.startDB(context);
+        //InfoManager.startDB(context);
 
         // TODO recuperar id juego de la bd e incrementarlo
         idPartida = InfoManager.getIdJuego() + 1;
@@ -141,6 +141,14 @@ public class GameManager {
             // Si la respuesta seleccionada es TRUE, entonces acerto la pregunta
             correcto = pregunta.getSolucionRespuesta(indexSeleccionadas.get(0));
             resultado = new Pair<>(correcto, indexSeleccionadas);
+        }
+
+        if(correcto){
+            EstadisticasManager.updateAcierto(idPartida, pregunta);
+        }
+        else{
+            // TODO pasar respuestas en vez de null
+            EstadisticasManager.updateFallo(idPartida, pregunta, null);
         }
 
 

@@ -43,13 +43,6 @@ public abstract  class InfoManager {
 
             // TODO Controlar el tipo de pregunta
 
-            /**
-             * NUEVO ESQUEMA
-             *  Metodo al que le paso el cursor y que me devuelve la pregunta ya construida
-             *  puedo crear diferentes metodos recuperando el tipo de pregunta, o dentro del mismo
-             *  metodo hacer un switch
-             */
-
             // Recuperar titulo
             String title= preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo"));
             int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
@@ -135,4 +128,24 @@ public abstract  class InfoManager {
         mDbHelper.addJuego("NA");
     }
 
+    public static String getEstadisticasJuego() {
+
+        Cursor estadisiticas = mDbHelper.getEstadisticas();
+
+        if(estadisiticas.moveToFirst() && estadisiticas.getCount() != 0) {
+            do {
+                int idJuego = estadisiticas.getInt(estadisiticas.getColumnIndex("idjuego"));
+
+                Log.d(TAG, idJuego + "");
+
+            } while (estadisiticas.moveToNext());
+        }
+        else{
+            Log.d(TAG, ":/" + estadisiticas.getCount());
+        }
+
+        // TODO
+        return "hola";
+
+    }
 }

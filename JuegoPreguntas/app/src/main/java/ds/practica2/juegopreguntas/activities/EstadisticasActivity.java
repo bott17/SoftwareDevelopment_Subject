@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import ds.practica2.juegopreguntas.R;
+import ds.practica2.juegopreguntas.manejadores.InfoManager;
 
 public class EstadisticasActivity extends MyActionBarActivity {
 
@@ -19,6 +20,12 @@ public class EstadisticasActivity extends MyActionBarActivity {
         setContentView(R.layout.activity_estadisticas);
 
         initComponents();
+        recuperarEstadisticasJuego();
+    }
+
+    private void recuperarEstadisticasJuego() {
+
+        String estadisticas = InfoManager.getEstadisticasJuego();
     }
 
     @Override

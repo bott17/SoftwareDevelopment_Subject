@@ -26,6 +26,7 @@ public class MainActivity extends MyActionBarActivity {
         setContentView(R.layout.activity_main);
 
         initComponents();
+        InfoManager.startDB(getApplicationContext());
 
 
         // TODO Eliminar
