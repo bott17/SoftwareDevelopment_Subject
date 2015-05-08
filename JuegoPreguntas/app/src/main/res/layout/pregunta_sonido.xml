@@ -9,17 +9,50 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <FrameLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-            <ImageButton
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton"
-                android:src="@drawable/abc_ic_voice_search_api_mtrl_alpha" />
-        </FrameLayout>
+                android:layout_height="fill_parent">
+
+                <ToggleButton
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="playbutton"
+                    android:id="@+id/botonTogglePlay"
+                    android:textOn=""
+                    android:textOff=""
+                    android:background="@drawable/play_icon3"
+                    android:checked="false" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <SeekBar
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seekBar"
+                    android:indeterminate="false" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/botonImagenStop"
+                    android:background="@drawable/stop_icon" />
+            </FrameLayout>
+
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"

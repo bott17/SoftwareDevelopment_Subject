@@ -3,15 +3,19 @@ package ds.practica2.juegopreguntas.activities;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -24,15 +28,23 @@ import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
+
 public class LanzadorActivity extends MyActionBarActivity {
 
     private static final String TAG = "LanzadorActivity";
+
+    // Elementos del reproductor
+    private Handler durationHandler = new Handler();
+    private double timeElapsed = 0, finalTime = 0;
 
     // Elementos visuales
     private static LinearLayout marco;
     private Button botonPrincipal;
     private Button botonRespuesta1, botonRespuesta2, botonRespuesta3, botonRespuesta4;
     private TextView textTituloPregunta, textDificultad;
+    ToggleButton toggleButtonPlay;
+    ImageView botonParar;
+    SeekBar seekBar;
 
     View.OnClickListener seleccionarRespuestaListener;
 
@@ -188,43 +200,86 @@ public class LanzadorActivity extends MyActionBarActivity {
             if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
 
                 viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_estandar, null, false);
-
+                marco.addView(viewPreguntas);
 
             } else{
 
                 viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
+                marco.addView(viewPreguntas);
 
-                int  idRecurso = ((PreguntaMultimedia)pregunta).getRefMultimedia();
-                //int idResource = this.getResources().getIdentifier(recurso, "raw", this.getPackageName());
-                MediaPlayer mediaPlayer = MediaPlayer.create(this, idRecurso);
+                SonidoManager.cargarSonido(((PreguntaMultimedia)pregunta).getRefMultimedia());
+
+
+                toggleButtonPlay = (ToggleButton)findViewById(R.id.botonTogglePlay);
+                toggleButtonPlay.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (toggleButtonPlay.isChecked()) { // Checked - Pause icon visible
+                            SonidoManager.reproducirSonido();
+                            timeElapsed = SonidoManager.getCurrentPosition();
+                            seekBar.setProgress((int) timeElapsed);
+                            durationHandler.postDelayed(updateSeekBarTime, 100);
+                        } else { // Unchecked - Play icon visible
+                           SonidoManager.pausarSonido();
+                        }
+                    }
+                });
+
+                botonParar = (ImageView)findViewById(R.id.botonImagenStop);
+                botonParar.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View v) {
+                       SonidoManager.pararSonido();
+                        toggleButtonPlay.setChecked(false);
+                    }
+                });
+
+                seekBar = (SeekBar) findViewById(R.id.seekBar);
+                seekBar.setMax(SonidoManager.getDuration());
+                seekBar.setClickable(false);
 
 
             }
 
-            marco.addView(viewPreguntas);
-
-            // Aniandiendo tags identificativos
-            botonRespuesta1 = (Button) findViewById(R.id.botonPregunta1);
-            botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
-            botonRespuesta2 = (Button) findViewById(R.id.botonpregunta2);
-            botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
-            botonRespuesta3 = (Button) findViewById(R.id.botonPregunta3);
-            botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
-            botonRespuesta4 = (Button) findViewById(R.id.botonPregunta4);
-            botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
-
-            botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
-            botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
-            botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
-            botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
 
 
-            botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
-            botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
-            botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
-            botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
+
         }
+
+        // Aniandiendo tags identificativos
+        botonRespuesta1 = (Button) findViewById(R.id.botonPregunta1);
+        botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
+        botonRespuesta2 = (Button) findViewById(R.id.botonpregunta2);
+        botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
+        botonRespuesta3 = (Button) findViewById(R.id.botonPregunta3);
+        botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
+        botonRespuesta4 = (Button) findViewById(R.id.botonPregunta4);
+        botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
+
+        botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
+        botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
+        botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
+        botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
+
+
+        botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
+        botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
+        botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
+        botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
     }
+
+    //handler to change seekBarTime
+    private Runnable updateSeekBarTime = new Runnable() {
+        public void run() {
+            //get current position
+            double timeElapsed = SonidoManager.getCurrentPosition();
+            //set seekbar progress
+            seekBar.setProgress((int) timeElapsed);
+
+            //repeat yourself that again in 100 miliseconds
+            durationHandler.postDelayed(this, 100);
+        }
+    };
 
 
     @Override
@@ -247,5 +302,12 @@ public class LanzadorActivity extends MyActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SonidoManager.pararSonido();
     }
 }
