@@ -164,8 +164,11 @@ public class LanzadorActivity extends MyActionBarActivity {
         // Comprobación de que queden preguntas
         if(preguntaActual != null)
             obtenerDatosPregunta(preguntaActual);
-        else
+        else {
+            if(SonidoManager.reproduciendo())
+                SonidoManager.pararSonido();
             finalizarJuego();
+        }
 
     }
 
@@ -307,7 +310,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     protected void onPause() {
         super.onPause();
 
-        if(preguntaActual != null && preguntaActual.getTipo().equals(TipoPregunta.SONIDO))
+        if(SonidoManager.reproduciendo())
             SonidoManager.pararSonido();
     }
 }

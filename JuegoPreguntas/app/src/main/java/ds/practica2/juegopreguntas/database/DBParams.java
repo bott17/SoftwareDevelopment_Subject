@@ -5,6 +5,8 @@ package ds.practica2.juegopreguntas.database;
  */
 public abstract class  DBParams {
 
+    private static final String TABLE_NAME_ESTADISTICAS = "estadisticas";
+
 
     protected static final String sqlGetPreguntas = "select titulo, idcategoria, respuesta, dificultad, correcta, recurso, tipopregunta from preguntas left JOIN respuestas on preguntas.rowid=idpregunta";
     protected static final String sqlGetIDJuego = "select count(*) from partidas";
@@ -22,7 +24,15 @@ public abstract class  DBParams {
     private static final String RESPUESTAS_RESPUESTA = "respuesta";
     private static final String RESPUESTAS_CORRECTA = "correcta";
 
+    private static final String ESTADISTICAS_IDJUEGO= "idjuego";
+    private static final String ESTADISTICAS_IDCATEGORIA = "idcategoria";
+    private static final String ESTADISTICAS_IDTIPO= "idtipo";
+    private static final String ESTADISTICAS_ACIERTO= "acierto";
 
+
+    public static String getTableNameEstadisticas() {
+        return TABLE_NAME_ESTADISTICAS;
+    }
 
     public static String getPreguntasTitulo() {
         return PREGUNTAS_TITULO;
@@ -50,5 +60,21 @@ public abstract class  DBParams {
 
     public static String getRespuestasCorrecta() {
         return RESPUESTAS_CORRECTA;
+    }
+
+    public static String getEstadisticasIdjuego() {
+        return ESTADISTICAS_IDJUEGO;
+    }
+
+    public static String getEstadisticasIdcategoria() {
+        return ESTADISTICAS_IDCATEGORIA;
+    }
+
+    public static String getEstadisticasIdtipo() {
+        return ESTADISTICAS_IDTIPO;
+    }
+
+    public static String getEstadisticasAcierto() {
+        return ESTADISTICAS_ACIERTO;
     }
 }

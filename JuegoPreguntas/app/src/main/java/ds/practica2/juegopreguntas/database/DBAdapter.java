@@ -118,12 +118,12 @@ public class DBAdapter {
         try
         {
             ContentValues estadisticas = new ContentValues();
-            estadisticas.put("idjuego", idPartida);
-            estadisticas.put("idcategoria", categoria); // TODO Categoria no controlada
-            estadisticas.put("idtipo", 1);
-            estadisticas.put("acierto", 1);
+            estadisticas.put(DBParams.getEstadisticasIdjuego(), idPartida);
+            estadisticas.put(DBParams.getEstadisticasIdcategoria(), categoria); // TODO Categoria no controlada
+            estadisticas.put(DBParams.getEstadisticasIdtipo(), 1);
+            estadisticas.put(DBParams.getEstadisticasAcierto(), 1);
 
-            mDb.insert("estadisticas", null, estadisticas);
+            mDb.insert(DBParams.getTableNameEstadisticas(), null, estadisticas);
         }
         catch (SQLException mSQLException)
         {
@@ -139,12 +139,12 @@ public class DBAdapter {
         try
         {
             ContentValues estadisticas = new ContentValues();
-            estadisticas.put("idjuego", idPartida);
-            estadisticas.put("idcategoria", categoria); // TODO Categoria no controlada
-            estadisticas.put("idtipo", 1);
-            estadisticas.put("acierto", 0);
+            estadisticas.put(DBParams.getEstadisticasIdjuego(), idPartida);
+            estadisticas.put(DBParams.getEstadisticasIdcategoria(), categoria); // TODO Categoria no controlada
+            estadisticas.put(DBParams.getEstadisticasIdtipo(), 1);
+            estadisticas.put(DBParams.getEstadisticasAcierto(), 0);
 
-            long resultado = mDb.insert("estadisticas", null, estadisticas);
+            long resultado = mDb.insert(DBParams.getTableNameEstadisticas(), null, estadisticas);
             Log.d(TAG, "Valor updateFallo: " + resultado );
         }
         catch (SQLException mSQLException)
