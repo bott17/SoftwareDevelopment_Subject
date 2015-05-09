@@ -110,22 +110,7 @@ public class DBAdapter {
 
     public Cursor getPreguntas() {
 
-        try
-        {
-            String sql ="select titulo, idcategoria, respuesta, dificultad, correcta, recurso, tipopregunta from preguntas left JOIN respuestas on preguntas.rowid=idpregunta";
-
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur!=null)
-            {
-                mCur.moveToNext();
-            }
-            return mCur;
-        }
-        catch (SQLException mSQLException)
-        {
-            Log.e(TAG, "getTestData >>"+ mSQLException.toString());
-            throw mSQLException;
-        }
+        return makeSql(DBParams.sqlGetPreguntas, "getPreguntas");
     }
 
     public void updateAcierto(int idPartida, TipoPregunta tipo, int categoria) {
@@ -171,22 +156,7 @@ public class DBAdapter {
 
     public Cursor getIdJuego() {
 
-        try
-        {
-            String sql = DBParams.sqlGetIDJuego;
-
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur!=null)
-            {
-                mCur.moveToNext();
-            }
-            return mCur;
-        }
-        catch (SQLException mSQLException)
-        {
-            Log.e(TAG, "getTestData >>"+ mSQLException.toString());
-            throw mSQLException;
-        }
+        return makeSql(DBParams.sqlGetIDJuego, "getIDJuego");
     }
 
     public void addJuego(String tipoJuego) {
@@ -197,26 +167,6 @@ public class DBAdapter {
         long resultado = mDb.insert("partidas", null, juegoContent);
         Log.d(TAG, "Valor updateFallo: " + resultado );
 
-    }
-
-    public Cursor getEstadisticas() {
-
-        try
-        {
-            String sql ="select * from estadisticas";
-
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur!=null)
-            {
-                mCur.moveToNext();
-            }
-            return mCur;
-        }
-        catch (SQLException mSQLException)
-        {
-            Log.e(TAG, "getEstadisticas >>"+ mSQLException.toString());
-            throw mSQLException;
-        }
     }
 
     public Cursor getNumPartidas() {

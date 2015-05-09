@@ -7,7 +7,6 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 
-import ds.practica2.juegopreguntas.EstadisticasPartida;
 import ds.practica2.juegopreguntas.database.DBAdapter;
 import ds.practica2.juegopreguntas.database.DBParams;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
@@ -44,11 +43,11 @@ abstract  class InfoManager {
             // TODO Controlar el tipo de pregunta
 
             // Recuperar titulo
-            String title= preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo"));
-            int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
-            int dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex("dificultad"));
-            int tipoPregunta = preguntasCursor.getInt(preguntasCursor.getColumnIndex("tipopregunta"));
-            String recurso = preguntasCursor.getString(preguntasCursor.getColumnIndex("recurso"));
+            String title= preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasTitulo()));
+            int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasIdcategoria()));
+            int dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasDificultad()));
+            int tipoPregunta = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasTipopregunta()));
+            String recurso = preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasRecurso()));
 
             ArrayList<Pair<String, Integer> > listaRespuestas  = new ArrayList<>();
 
@@ -68,19 +67,19 @@ abstract  class InfoManager {
 
 
                     listaRespuestas  = new ArrayList<>();
-                    title = (preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")));
-                    tipoPregunta = preguntasCursor.getInt(preguntasCursor.getColumnIndex("tipopregunta"));
-                    recurso = preguntasCursor.getString(preguntasCursor.getColumnIndex("recurso"));
+                    title = (preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasTitulo())));
+                    tipoPregunta = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasTipopregunta()));
+                    recurso = preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasRecurso()));
 
                 }
 
                 // Aniando preguntas
-                    listaRespuestas.add(new Pair<String, Integer>(preguntasCursor.getString(preguntasCursor.getColumnIndex("respuesta")), preguntasCursor.getInt(preguntasCursor.getColumnIndex("correcta"))));
+                    listaRespuestas.add(new Pair<>(preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getRespuestasRespuesta())), preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getRespuestasCorrecta()))));
 
 
                 // TODO añadir categoria
-                idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex("idcategoria"));
-                dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex("dificultad"));
+                idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasIdcategoria()));
+                dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasDificultad()));
 
             } while (preguntasCursor.moveToNext());
 

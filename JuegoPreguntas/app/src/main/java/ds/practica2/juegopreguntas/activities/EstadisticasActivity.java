@@ -31,9 +31,9 @@ public class EstadisticasActivity extends MyActionBarActivity {
 
         ArrayList<Integer> resumenEstadisticas = EstadisticasManager.getResumen();
 
-        // Control de que hara partidas realizadas
+        // Control de que haya partidas realizadas
         if(resumenEstadisticas.size() > 0) {
-            textNumPartidas.setText(Integer.toString(resumenEstadisticas.get(0)));
+            textNumPartidas.setText(Integer.toString(resumenEstadisticas.get(0)-1));
             textNumAciertos.setText(Integer.toString(resumenEstadisticas.get(1)));
             textNumFallos.setText(Integer.toString(resumenEstadisticas.get(2)));
         }
