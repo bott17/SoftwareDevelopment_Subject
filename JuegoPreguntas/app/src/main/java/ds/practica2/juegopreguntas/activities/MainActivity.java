@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.database.DBAdapter;
-import ds.practica2.juegopreguntas.manejadores.InfoManager;
+import ds.practica2.juegopreguntas.manejadores.EstadisticasManager;
 
 
 public class MainActivity extends MyActionBarActivity {
@@ -26,19 +26,11 @@ public class MainActivity extends MyActionBarActivity {
         setContentView(R.layout.activity_main);
 
         initComponents();
-        InfoManager.startDB(getApplicationContext());
+        EstadisticasManager.startDB(getApplicationContext());
 
 
         // TODO Eliminar
         //testDB();
-        //testInfomanager();
-    }
-
-
-    private void testInfomanager() {
-
-        InfoManager.startDB(getApplicationContext());
-        InfoManager.getPreguntas(getApplicationContext(),1, null);
     }
 
     public void testDB(){

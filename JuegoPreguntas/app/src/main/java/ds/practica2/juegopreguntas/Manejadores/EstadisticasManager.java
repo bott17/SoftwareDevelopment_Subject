@@ -1,5 +1,7 @@
 package ds.practica2.juegopreguntas.manejadores;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
@@ -17,5 +19,14 @@ public abstract class EstadisticasManager {
     public static void updateFallo(int idPartida, Pregunta pregunta, ArrayList<Integer> respuestas) {
 
         InfoManager.updateFallo(idPartida, pregunta.getTipo(), pregunta.getCategoria());
+    }
+
+    public static ArrayList<Integer> getResumen() {
+
+        return InfoManager.getResumen();
+    }
+
+    public static void startDB(Context applicationContext) {
+        InfoManager.startDB(applicationContext);
     }
 }

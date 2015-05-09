@@ -6,13 +6,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.R;
-import ds.practica2.juegopreguntas.manejadores.InfoManager;
+import ds.practica2.juegopreguntas.manejadores.EstadisticasManager;
 
 public class EstadisticasActivity extends MyActionBarActivity {
 
     private Button botonPrincipal;
+    private TextView textNumPartidas, textNumAciertos, textNumFallos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +24,20 @@ public class EstadisticasActivity extends MyActionBarActivity {
         setContentView(R.layout.activity_estadisticas);
 
         initComponents();
-        recuperarEstadisticasJuego();
+        recuperarResumenEstadisticas();
     }
 
-    private void recuperarEstadisticasJuego() {
+    private void recuperarResumenEstadisticas() {
 
-        String estadisticas = InfoManager.getEstadisticasJuego();
+        ArrayList<Integer> resumenEstadisticas = EstadisticasManager.getResumen();
+
+        // Control de que hara partidas realizadas
+        if(resumenEstadisticas.size() > 0) {
+            textNumPartidas.setText(Integer.toString(resumenEstadisticas.get(0)));
+            textNumAciertos.setText(Integer.toString(resumenEstadisticas.get(1)));
+            textNumFallos.setText(Integer.toString(resumenEstadisticas.get(2)));
+        }
+
     }
 
     @Override
@@ -39,6 +51,10 @@ public class EstadisticasActivity extends MyActionBarActivity {
                 startActivity(i);
             }
         });
+
+        textNumPartidas = (TextView) findViewById(R.id.textViewTotalPartidas);
+        textNumAciertos = (TextView) findViewById(R.id.textViewTotalAciertos);
+        textNumFallos = (TextView) findViewById(R.id.textViewTotalFallos);
 
     }
 

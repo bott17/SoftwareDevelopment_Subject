@@ -1,6 +1,7 @@
 package ds.practica2.juegopreguntas.sonidos;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 
 import java.io.IOException;

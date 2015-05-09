@@ -11,7 +11,64 @@
         android:layout_height="wrap_content"
         android:text="principal"
         android:id="@+id/bottonPrincipal"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fallos"
+        android:id="@+id/textView"
+        android:layout_marginTop="99dp"
+        android:layout_below="@+id/bottonPrincipal"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Aciertos"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/textViewTotalPartidas"
+        android:layout_alignEnd="@+id/textViewTotalAciertos" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Numero de partidas"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="totalpartidas"
+        android:id="@+id/textViewTotalPartidas"
+        android:layout_below="@+id/textView3"
+        android:layout_alignEnd="@+id/bottonPrincipal"
+        android:layout_marginTop="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="totalAciertos"
+        android:id="@+id/textViewTotalAciertos"
+        android:layout_alignTop="@+id/textViewTotalPartidas"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="totalFallos"
+        android:id="@+id/textViewTotalFallos"
+        android:layout_alignTop="@+id/textViewTotalAciertos"
+        android:layout_alignEnd="@+id/textView" />
 
 </RelativeLayout>

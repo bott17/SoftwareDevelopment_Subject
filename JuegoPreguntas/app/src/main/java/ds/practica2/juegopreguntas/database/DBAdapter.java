@@ -61,6 +61,33 @@ public class DBAdapter {
         mDbHelper.close();
     }
 
+    /**
+     * Crea una consulta de recuperacion de datos
+     * @param consulta Consulta sql a realizar
+     * @param idError Tag para identificar posible error en el log
+     * @return Cursor con el resultado
+     */
+    private Cursor makeSql(String consulta, String idError){
+
+        try
+        {
+            String sql =consulta;
+
+            Cursor mCur = mDb.rawQuery(sql, null);
+            if (mCur!=null)
+            {
+                mCur.moveToNext();
+            }
+            return mCur;
+        }
+        catch (SQLException mSQLException)
+        {
+            Log.e(TAG, idError +" >> " + mSQLException.toString());
+            throw mSQLException;
+        }
+
+    }
+
     public Cursor getTestData()
     {
         try
@@ -146,7 +173,7 @@ public class DBAdapter {
 
         try
         {
-            String sql = "select count(*) from partidas";
+            String sql = DBParams.sqlGetIDJuego;
 
             Cursor mCur = mDb.rawQuery(sql, null);
             if (mCur!=null)
@@ -190,5 +217,18 @@ public class DBAdapter {
             Log.e(TAG, "getEstadisticas >>"+ mSQLException.toString());
             throw mSQLException;
         }
+    }
+
+    public Cursor getNumPartidas() {
+
+        return makeSql(DBParams.sqlGetNumParditas, "GetNumPartidas");
+    }
+
+    public Cursor getNumAciertos() {
+        return makeSql(DBParams.sqlGetNumAciertos, "GetNumAciertos");
+    }
+
+    public Cursor getNumFallos() {
+        return makeSql(DBParams.sqlGetNumFallos, "GetNumFallos");
     }
 }
