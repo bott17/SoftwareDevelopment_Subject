@@ -307,6 +307,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     protected void onPause() {
         super.onPause();
 
-        SonidoManager.pararSonido();
+        if(preguntaActual != null && preguntaActual.getTipo().equals(TipoPregunta.SONIDO))
+            SonidoManager.pararSonido();
     }
 }

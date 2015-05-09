@@ -171,4 +171,24 @@ public class DBAdapter {
         Log.d(TAG, "Valor updateFallo: " + resultado );
 
     }
+
+    public Cursor getEstadisticas() {
+
+        try
+        {
+            String sql ="select * from estadisticas";
+
+            Cursor mCur = mDb.rawQuery(sql, null);
+            if (mCur!=null)
+            {
+                mCur.moveToNext();
+            }
+            return mCur;
+        }
+        catch (SQLException mSQLException)
+        {
+            Log.e(TAG, "getEstadisticas >>"+ mSQLException.toString());
+            throw mSQLException;
+        }
+    }
 }
