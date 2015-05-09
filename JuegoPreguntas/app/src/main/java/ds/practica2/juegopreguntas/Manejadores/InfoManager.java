@@ -7,8 +7,9 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 
-import ds.practica2.juegopreguntas.Estadisticas;
+import ds.practica2.juegopreguntas.EstadisticasPartida;
 import ds.practica2.juegopreguntas.database.DBAdapter;
+import ds.practica2.juegopreguntas.database.DBParams;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
@@ -17,7 +18,7 @@ import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 /**
  * Created by bott1 on 14/04/2015.
  */
-public abstract  class InfoManager {
+abstract  class InfoManager {
 
     private static String TAG = "InfoManager";
 
@@ -35,7 +36,6 @@ public abstract  class InfoManager {
 
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
-        mDbHelper.open();
         Cursor preguntasCursor = mDbHelper.getPreguntas();
 
 
@@ -107,14 +107,6 @@ public abstract  class InfoManager {
 
     }
 
-    public Estadisticas getEstadisticas(){
-
-        // TODO Obtener estadisticas de BD
-        Estadisticas estadisticas = new Estadisticas();
-        return estadisticas;
-
-    }
-
     public static int getIdJuego() {
 
         Cursor resultado = mDbHelper.getIdJuego();
@@ -128,24 +120,24 @@ public abstract  class InfoManager {
         mDbHelper.addJuego("NA");
     }
 
-    public static String getEstadisticasJuego() {
+    /**
+     * Obtiene un resumen de las estadisticas del jugador
+     * @return Array con los resultados: Numero de partidas, numero de aciertos y numero de fallos
+     */
+    public static ArrayList<Integer> getResumen() {
 
-        Cursor estadisiticas = mDbHelper.getEstadisticas();
+        ArrayList<Integer> resumen = new ArrayList<>();
 
-        if(estadisiticas.moveToFirst() && estadisiticas.getCount() != 0) {
-            do {
-                int idJuego = estadisiticas.getInt(estadisiticas.getColumnIndex("idjuego"));
+        Cursor resultado = mDbHelper.getNumPartidas();
+        resumen.add(resultado.getCount());
 
-                Log.d(TAG, idJuego + "");
+        resultado = mDbHelper.getNumAciertos();
+        resumen.add(resultado.getCount());
 
-            } while (estadisiticas.moveToNext());
-        }
-        else{
-            Log.d(TAG, ":/" + estadisiticas.getCount());
-        }
+        resultado = mDbHelper.getNumFallos();
+        resumen.add(resultado.getCount());
 
-        // TODO
-        return "hola";
+        return resumen;
 
     }
 }
