@@ -16,8 +16,8 @@
             android:layout_marginRight="70dp">
 
             <ImageView
-                android:layout_width="95px"
-                android:layout_height="127px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageViewFoto1"
                 android:background="#ff276bff" />
         </FrameLayout>
@@ -27,8 +27,8 @@
             android:layout_height="fill_parent">
 
             <ImageView
-                android:layout_width="95px"
-                android:layout_height="127px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageViewFoto2"
                 android:background="#ff5199ff" />
         </FrameLayout>
@@ -47,8 +47,8 @@
             android:layout_marginRight="70dp">
 
             <ImageView
-                android:layout_width="95px"
-                android:layout_height="127px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageViewFoto3"
                 android:background="#ff409cff" />
         </FrameLayout>
@@ -58,8 +58,8 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="95px"
-                android:layout_height="127px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageViewFoto4"
                 android:background="#ff1f8cff" />
         </FrameLayout>

@@ -163,14 +163,18 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void cambiarPregunta(){
 
+        // Para el sonido al cambiar de pregunta
+        if(SonidoManager.reproduciendo()) {
+            Log.d(TAG, "parando sonido");
+            SonidoManager.pararSonido();
+        }
+
         preguntaActual = gameManager.siguientePregunta();
 
         // Comprobación de que queden preguntas
         if(preguntaActual != null)
             obtenerDatosPregunta(preguntaActual);
         else {
-            if(SonidoManager.reproduciendo())
-                SonidoManager.pararSonido();
             finalizarJuego();
         }
 
@@ -306,6 +310,12 @@ public class LanzadorActivity extends MyActionBarActivity {
 
                 int idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(0).first, "drawable", getApplicationContext().getPackageName());
                 foto1.setImageDrawable(getResources().getDrawable(idResource));
+                idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(1).first, "drawable", getApplicationContext().getPackageName());
+                foto2.setImageDrawable(getResources().getDrawable(idResource));
+                idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(2).first, "drawable", getApplicationContext().getPackageName());
+                foto3.setImageDrawable(getResources().getDrawable(idResource));
+                idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(3).first, "drawable", getApplicationContext().getPackageName());
+                foto4.setImageDrawable(getResources().getDrawable(idResource));
                 break;
         }
     }
