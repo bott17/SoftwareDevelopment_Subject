@@ -46,6 +46,7 @@ abstract  class InfoManager {
             String title= preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasTitulo()));
             int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasIdcategoria()));
             int dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasDificultad()));
+            // TODO Añadir tipo mediante enums
             int tipoPregunta = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasTipopregunta()));
             String recurso = preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasRecurso()));
 
@@ -56,13 +57,18 @@ abstract  class InfoManager {
 
                 // Comprobacion: si el titulo cambia, crear pregunta e inicializar los campos de la pregunta
                 if( !title.equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")))) {
-                    if(tipoPregunta != 3) { // Si no es una pregunta de sonido...
+                    // TODO Utilizar el enum como selector
+                    // TODO utilizar swtich?
+                    if(tipoPregunta == 1) {
                         preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, dificultad));
                     }
-                    else{
+                    else if (tipoPregunta == 3){
 
                         int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
                         preguntas.add(PreguntaFactoria.makePreguntaSonido(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
+                    }
+                    else if(tipoPregunta == 2){
+                        preguntas.add(PreguntaFactoria.makePreguntaImagenes(TipoPregunta.IMAGEN, title, idCategoria, listaRespuestas, dificultad));
                     }
 
 
@@ -84,12 +90,18 @@ abstract  class InfoManager {
             } while (preguntasCursor.moveToNext());
 
             // Crear la ultima pregunta, una vez el cursor ya ha finalizado
-            if(tipoPregunta != 3) { // Si no es una pregunta de sonido...
+            // TODO Utilizar el enum como selector
+            // TODO utilizar swtich?
+            if(tipoPregunta == 1) {
                 preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, dificultad));
             }
-            else{
+            else if (tipoPregunta == 3){
+
                 int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
                 preguntas.add(PreguntaFactoria.makePreguntaSonido(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
+            }
+            else if(tipoPregunta == 2){
+                preguntas.add(PreguntaFactoria.makePreguntaImagenes(TipoPregunta.IMAGEN, title, idCategoria, listaRespuestas, dificultad));
             }
         }
         return preguntas;

@@ -71,6 +71,9 @@ public abstract class SonidoManager {
 
     public static boolean reproduciendo() {
 
-        return reproductor.isPlaying();
+        if(reproductor != null)
+            return reproductor.isPlaying();
+        else
+            return false;
     }
 }

@@ -40,4 +40,11 @@ public abstract class PreguntaFactoria {
         PreguntaSonido pregunta = new PreguntaSonido(tipoPregunta, titulo, categoria, respuestas, refMultimedia, dificultad);
         return pregunta;
     }
+
+    public static Pregunta makePreguntaImagenes(TipoPregunta tipoPregunta, String titulo, int categoria,
+                                                ArrayList<Pair<String, Integer>> respuestas, int dificultad){
+        Pregunta pregunta = new Pregunta(tipoPregunta, titulo, categoria, respuestas, dificultad);
+        return pregunta;
+
+    }
 }
