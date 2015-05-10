@@ -1,6 +1,7 @@
 package ds.practica2.juegopreguntas.activities;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
 import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
+import ds.practica2.juegopreguntas.popups.Popup;
+import ds.practica2.juegopreguntas.popups.PopupFallo;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaSonido;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
@@ -47,6 +50,8 @@ public class LanzadorActivity extends MyActionBarActivity {
     private ImageView botonParar;
     private SeekBar seekBar;
     private ImageView foto1, foto2, foto3, foto4;
+
+    Popup popupFallo;
 
 
     View.OnClickListener seleccionarRespuestaListener;
@@ -86,6 +91,9 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     @Override
     protected void initComponents() {
+
+        // Creando el popup de de fallo
+        popupFallo = new PopupFallo();
 
         // Cargando los sonidos
         SonidoManager.load(getApplicationContext());
@@ -144,14 +152,24 @@ public class LanzadorActivity extends MyActionBarActivity {
                     else {
                         Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
                         sonidoResultado(false);
+
+                        lanzarPopupFallo();
                     }
                 }
 
+                // TODO Desactivado
                 cambiarPregunta();
             }
         };
 
 
+
+
+    }
+
+    private void lanzarPopupFallo() {
+
+        popupFallo.showChargedPopup(this, new Point(200, 500));
 
 
     }
