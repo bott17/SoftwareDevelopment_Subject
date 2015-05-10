@@ -7,6 +7,9 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/frameMarcoPopup"></FrameLayout>
+        android:id="@+id/frameMarcoPopup"
+        android:background="@color/background_floating_material_dark"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="80dp"></FrameLayout>
 
 </LinearLayout>

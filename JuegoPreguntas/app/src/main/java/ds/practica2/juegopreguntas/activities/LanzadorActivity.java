@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -93,7 +95,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     protected void initComponents() {
 
         // Creando el popup de de fallo
-        popupFallo = new PopupFallo();
+        popupFallo = new PopupFallo(this, null);
 
         // Cargando los sonidos
         SonidoManager.load(getApplicationContext());
@@ -157,7 +159,6 @@ public class LanzadorActivity extends MyActionBarActivity {
                     }
                 }
 
-                // TODO Desactivado
                 cambiarPregunta();
             }
         };
@@ -169,7 +170,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void lanzarPopupFallo() {
 
-        popupFallo.showChargedPopup(this, new Point(200, 500));
+        popupFallo.showChargedPopup(new Point(0, 0));
 
 
     }
