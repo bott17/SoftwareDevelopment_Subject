@@ -27,6 +27,8 @@ import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
+import static ds.practica2.juegopreguntas.preguntas.TipoPregunta.DEFAULT;
+
 
 public class LanzadorActivity extends MyActionBarActivity {
 
@@ -41,9 +43,11 @@ public class LanzadorActivity extends MyActionBarActivity {
     private Button botonPrincipal;
     private Button botonRespuesta1, botonRespuesta2, botonRespuesta3, botonRespuesta4;
     private TextView textTituloPregunta, textDificultad;
-    ToggleButton toggleButtonPlay;
-    ImageView botonParar;
-    SeekBar seekBar;
+    private ToggleButton toggleButtonPlay;
+    private ImageView botonParar;
+    private SeekBar seekBar;
+    private ImageView foto1, foto2, foto3, foto4;
+
 
     View.OnClickListener seleccionarRespuestaListener;
 
@@ -117,7 +121,7 @@ public class LanzadorActivity extends MyActionBarActivity {
                 else if(preguntaActual.getTipoRespuestas() == TipoRespuestas.SIMPLE){
 
                     int index = -1;
-                    switch ((int)v.getTag(R.id.botonPregunta1)){
+                    switch ((int)v.getTag(v.getId())){
                         case 1:
                             index = 0;
                             break;
@@ -159,14 +163,18 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void cambiarPregunta(){
 
+        // Para el sonido al cambiar de pregunta
+        if(SonidoManager.reproduciendo()) {
+            Log.d(TAG, "parando sonido");
+            SonidoManager.pararSonido();
+        }
+
         preguntaActual = gameManager.siguientePregunta();
 
         // Comprobación de que queden preguntas
         if(preguntaActual != null)
             obtenerDatosPregunta(preguntaActual);
         else {
-            if(SonidoManager.reproduciendo())
-                SonidoManager.pararSonido();
             finalizarJuego();
         }
 
@@ -197,22 +205,43 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         View viewPreguntas;
 
-        if(preguntaActual.getTipo().equals(TipoPregunta.DEFAULT) || preguntaActual.getTipo().equals(TipoPregunta.SONIDO)) {
 
-            if (preguntaActual.getTipo().equals(TipoPregunta.DEFAULT)) {
+        // TODO Switch con enums?
+        if (preguntaActual.getTipo().equals(DEFAULT)) {
 
-                viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_estandar, null, false);
-                marco.addView(viewPreguntas);
+            viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_estandar, null, false);
+            marco.addView(viewPreguntas);
 
-            } else{
+            cargarElementosPregunta(preguntaActual.getTipo());
 
-                viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
-                marco.addView(viewPreguntas);
+        }
+        else if (preguntaActual.getTipo().equals(TipoPregunta.SONIDO)) {
 
-                SonidoManager.cargarSonido(((PreguntaSonido)pregunta).getRefMultimedia());
+            viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_sonido, null, false);
+            marco.addView(viewPreguntas);
+
+            SonidoManager.cargarSonido(((PreguntaSonido) pregunta).getRefMultimedia());
+
+            cargarElementosPregunta(preguntaActual.getTipo());
+
+        }
+        else if(preguntaActual.getTipo().equals(TipoPregunta.IMAGEN)){
+
+            viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_imagenes, null, false);
+            marco.addView(viewPreguntas);
+
+            cargarElementosPregunta(preguntaActual.getTipo());
 
 
-                toggleButtonPlay = (ToggleButton)findViewById(R.id.botonTogglePlay);
+        }
+
+    }
+
+    private void cargarElementosPregunta(TipoPregunta tipo) {
+
+        switch (tipo){
+            case SONIDO:
+                toggleButtonPlay = (ToggleButton) findViewById(R.id.botonTogglePlay);
                 toggleButtonPlay.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -222,16 +251,16 @@ public class LanzadorActivity extends MyActionBarActivity {
                             seekBar.setProgress((int) timeElapsed);
                             durationHandler.postDelayed(updateSeekBarTime, 100);
                         } else { // Unchecked - Play icon visible
-                           SonidoManager.pausarSonido();
+                            SonidoManager.pausarSonido();
                         }
                     }
                 });
 
-                botonParar = (ImageView)findViewById(R.id.botonImagenStop);
-                botonParar.setOnClickListener(new View.OnClickListener(){
+                botonParar = (ImageView) findViewById(R.id.botonImagenStop);
+                botonParar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       SonidoManager.pararSonido();
+                        SonidoManager.pararSonido();
                         toggleButtonPlay.setChecked(false);
                     }
                 });
@@ -239,35 +268,56 @@ public class LanzadorActivity extends MyActionBarActivity {
                 seekBar = (SeekBar) findViewById(R.id.seekBar);
                 seekBar.setMax(SonidoManager.getDuration());
                 seekBar.setClickable(false);
+                // No tiene break ya que carga tambien los elementos de Default
+
+            case DEFAULT:
+                // Aniandiendo tags identificativos
+                botonRespuesta1 = (Button) findViewById(R.id.botonPregunta1);
+                botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
+                botonRespuesta2 = (Button) findViewById(R.id.botonpregunta2);
+                botonRespuesta2.setTag(R.id.botonpregunta2, respuesta2);
+                botonRespuesta3 = (Button) findViewById(R.id.botonPregunta3);
+                botonRespuesta3.setTag(R.id.botonPregunta3, respuesta3);
+                botonRespuesta4 = (Button) findViewById(R.id.botonPregunta4);
+                botonRespuesta4.setTag(R.id.botonPregunta4, respuesta4);
+
+                botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
+                botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
+                botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
+                botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
 
 
-            }
+                botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
+                botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
+                botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
+                botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
+                break;
 
+            case IMAGEN:
+                foto1 = (ImageView) findViewById(R.id.imageViewFoto1);
+                foto1.setTag(R.id.imageViewFoto1,respuesta1);
+                foto2 = (ImageView) findViewById(R.id.imageViewFoto2);
+                foto2.setTag(R.id.imageViewFoto2,respuesta2);
+                foto3 = (ImageView) findViewById(R.id.imageViewFoto3);
+                foto3.setTag(R.id.imageViewFoto3,respuesta3);
+                foto4 = (ImageView) findViewById(R.id.imageViewFoto4);
+                foto4.setTag(R.id.imageViewFoto4,respuesta4);
 
+                foto1.setOnClickListener(seleccionarRespuestaListener);
+                foto2.setOnClickListener(seleccionarRespuestaListener);
+                foto3.setOnClickListener(seleccionarRespuestaListener);
+                foto4.setOnClickListener(seleccionarRespuestaListener);
 
-
+                int idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(0).first, "drawable", getApplicationContext().getPackageName());
+                foto1.setImageDrawable(getResources().getDrawable(idResource));
+                idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(1).first, "drawable", getApplicationContext().getPackageName());
+                foto2.setImageDrawable(getResources().getDrawable(idResource));
+                idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(2).first, "drawable", getApplicationContext().getPackageName());
+                foto3.setImageDrawable(getResources().getDrawable(idResource));
+                idResource = getApplicationContext().getResources().getIdentifier(preguntaActual.getRespuestas().get(3).first, "drawable", getApplicationContext().getPackageName());
+                foto4.setImageDrawable(getResources().getDrawable(idResource));
+                break;
         }
-
-        // Aniandiendo tags identificativos
-        botonRespuesta1 = (Button) findViewById(R.id.botonPregunta1);
-        botonRespuesta1.setTag(R.id.botonPregunta1, respuesta1);
-        botonRespuesta2 = (Button) findViewById(R.id.botonpregunta2);
-        botonRespuesta2.setTag(R.id.botonPregunta1, respuesta2);
-        botonRespuesta3 = (Button) findViewById(R.id.botonPregunta3);
-        botonRespuesta3.setTag(R.id.botonPregunta1, respuesta3);
-        botonRespuesta4 = (Button) findViewById(R.id.botonPregunta4);
-        botonRespuesta4.setTag(R.id.botonPregunta1, respuesta4);
-
-        botonRespuesta1.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta2.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta3.setOnClickListener(seleccionarRespuestaListener);
-        botonRespuesta4.setOnClickListener(seleccionarRespuestaListener);
-
-
-        botonRespuesta1.setText(preguntaActual.getRespuestas().get(0).first);
-        botonRespuesta2.setText(preguntaActual.getRespuestas().get(1).first);
-        botonRespuesta3.setText(preguntaActual.getRespuestas().get(2).first);
-        botonRespuesta4.setText(preguntaActual.getRespuestas().get(3).first);
     }
 
     //handler to change seekBarTime
