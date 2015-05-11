@@ -1,14 +1,14 @@
 package ds.practica2.juegopreguntas.database;
 
 
-import java.io.IOException;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.io.IOException;
 
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
 

@@ -1,7 +1,5 @@
 package ds.practica2.juegopreguntas.activities;
 
-import ds.practica2.juegopreguntas.activities.util.SystemUiHider;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ds.practica2.juegopreguntas.R;
+import ds.practica2.juegopreguntas.activities.util.SystemUiHider;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.

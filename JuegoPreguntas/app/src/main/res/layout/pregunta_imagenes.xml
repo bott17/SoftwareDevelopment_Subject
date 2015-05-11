@@ -5,63 +5,72 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#ffd7ffd2"
         android:layout_gravity="center_horizontal">
 
-        <FrameLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="70dp">
+            android:layout_gravity="center_horizontal">
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageViewFoto1"
-                android:background="#ff276bff" />
-        </FrameLayout>
+                android:layout_marginRight="70dp">
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewFoto1"
+                    android:background="#ff276bff" />
+            </FrameLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewFoto2"
-                android:background="#ff5199ff" />
-        </FrameLayout>
-    </LinearLayout>
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewFoto2"
+                    android:background="#ff5199ff" />
+            </FrameLayout>
+        </LinearLayout>
 
-        <FrameLayout
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="70dp">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp">
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageViewFoto3"
-                android:background="#ff409cff" />
-        </FrameLayout>
+                android:layout_marginRight="70dp">
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewFoto3"
+                    android:background="#ff409cff" />
+            </FrameLayout>
 
-            <ImageView
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageViewFoto4"
-                android:background="#ff1f8cff" />
-        </FrameLayout>
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageViewFoto4"
+                    android:background="#ff1f8cff" />
+            </FrameLayout>
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

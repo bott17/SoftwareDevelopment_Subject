@@ -20,15 +20,15 @@ import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
-import ds.practica2.juegopreguntas.manejadores.SonidoManager;
+import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
+import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.popups.PopupFallo;
 import ds.practica2.juegopreguntas.popups.PopupFinJuegoResumen;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaSonido;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
-import ds.practica2.juegopreguntas.R;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
 import static ds.practica2.juegopreguntas.preguntas.TipoPregunta.DEFAULT;
