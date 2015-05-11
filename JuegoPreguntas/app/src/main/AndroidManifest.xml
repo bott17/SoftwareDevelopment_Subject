@@ -32,10 +32,6 @@
             android:label="@string/title_activity_external_game"
             android:theme="@style/FullscreenTheme" >
         </activity>
-        <activity
-            android:name=".activities.ResumenJuegoActivity"
-            android:label="@string/title_activity_resumen_juego" >
-        </activity>
     </application>
 
 </manifest>

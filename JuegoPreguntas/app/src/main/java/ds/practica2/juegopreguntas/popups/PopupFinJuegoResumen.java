@@ -48,21 +48,22 @@ public class PopupFinJuegoResumen extends Popup {
     private void mostrarSoluciones(ArrayList<Pair<String, String>> _soluciones_) {
 
 
-        for(Pair<String, String> solucion: _soluciones_){
-            View elemento = LayoutInflater.from(actividad.getApplicationContext()).inflate(R.layout.elemento_resumen, null, false);
+        if(_soluciones_.size() > 0) {
+            for (Pair<String, String> solucion : _soluciones_) {
+                View elemento = LayoutInflater.from(actividad.getApplicationContext()).inflate(R.layout.elemento_resumen, null, false);
 
-            TextView titulo = (TextView)elemento.findViewById(R.id.textResumenTitulo);
-            TextView respuesta = (TextView)elemento.findViewById(R.id.textResumenRespuesta);
+                TextView titulo = (TextView) elemento.findViewById(R.id.textResumenTitulo);
+                TextView respuesta = (TextView) elemento.findViewById(R.id.textResumenRespuesta);
 
-            titulo.setText(solucion.first);
-            respuesta.setText(solucion.second);
+                titulo.setText(solucion.first);
+                respuesta.setText(solucion.second);
 
-            LinearLayout dock = (LinearLayout)super.layoutMarco.findViewById(R.id.linearLayoutDock);
-            dock.addView(elemento);
-
-
-
+                LinearLayout dock = (LinearLayout) super.layoutMarco.findViewById(R.id.linearLayoutDock);
+                dock.addView(elemento);
+            }
         }
+        else
+            ((TextView)super.layoutMarco.findViewById(R.id.textResumenFelicitacion)).setText("¡No has fallado ninguna!");
     }
 
     @Override
