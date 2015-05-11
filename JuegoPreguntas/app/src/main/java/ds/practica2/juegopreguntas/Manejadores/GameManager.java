@@ -79,7 +79,7 @@ public class GameManager {
         indexDeFallos = new ArrayList<>();
 
         // Variables comunes al tipo de juego
-        int numeroPreguntas = -1;
+        int numeroPreguntas = 10;
         int fallosPermitidos = -1;
         ArrayList<TipoPregunta> tiposDePreguntas = null;
 
