@@ -105,10 +105,8 @@ public abstract class Popup {
 
     }
 
-    public void ocultarPopup(){
+    public void cerrarPopup(){
         Log.d(TAG, "Ocultar popup");
         popupWindow.dismiss();
     }
-
-    protected abstract void initComponents();
 }
