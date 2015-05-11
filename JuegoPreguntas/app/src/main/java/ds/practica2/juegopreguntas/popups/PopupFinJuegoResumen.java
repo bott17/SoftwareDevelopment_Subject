@@ -1,10 +1,7 @@
 package ds.practica2.juegopreguntas.popups;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Point;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +14,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.R;
-import ds.practica2.juegopreguntas.activities.MainActivity;
 
 /**
  * Created by bott1 on 11/05/2015.
@@ -25,7 +21,7 @@ import ds.practica2.juegopreguntas.activities.MainActivity;
 public class PopupFinJuegoResumen extends Popup {
 
     // Visuales
-    private ScrollView scrollView;
+    private LinearLayout dock;
     private Button principal;
 
 
@@ -58,7 +54,6 @@ public class PopupFinJuegoResumen extends Popup {
                 titulo.setText(solucion.first);
                 respuesta.setText(solucion.second);
 
-                LinearLayout dock = (LinearLayout) super.layoutMarco.findViewById(R.id.linearLayoutDock);
                 dock.addView(elemento);
             }
         }
@@ -75,7 +70,7 @@ public class PopupFinJuegoResumen extends Popup {
     protected void initComponents() {
 
 
-        scrollView = (ScrollView)super.layoutMarco.findViewById(R.id.scrollViewMarcoResumen);
+        dock = (LinearLayout) super.layoutMarco.findViewById(R.id.linearLayoutDock);
         principal = (Button)super.layoutMarco.findViewById(R.id.botonListo);
 
 

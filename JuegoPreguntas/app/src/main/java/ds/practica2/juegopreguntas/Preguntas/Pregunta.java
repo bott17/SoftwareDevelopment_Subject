@@ -3,7 +3,6 @@ package ds.practica2.juegopreguntas.preguntas;
 import android.util.Pair;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
-import android.text.Layout;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;

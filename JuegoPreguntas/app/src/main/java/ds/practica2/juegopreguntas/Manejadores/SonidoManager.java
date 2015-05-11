@@ -3,8 +3,6 @@ package ds.practica2.juegopreguntas.manejadores;
 import android.content.Context;
 import android.util.Log;
 
-import java.lang.annotation.RetentionPolicy;
-
 import ds.practica2.juegopreguntas.sonidos.Reproductor;
 import ds.practica2.juegopreguntas.sonidos.ReproductorCorto;
 
