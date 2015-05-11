@@ -72,4 +72,14 @@ public class Pregunta {
     public int getDificultad() {
         return dificultad;
     }
+
+    public String getRespuestaCorrecta() {
+        String solucion="";
+        for(Pair<String, Integer> pair: respuestas){
+            if(pair.second == 1){
+                solucion = pair.first;
+            }
+        }
+        return solucion;
+    }
 }

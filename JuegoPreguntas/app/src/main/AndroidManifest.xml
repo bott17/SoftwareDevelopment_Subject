@@ -9,7 +9,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name" >
@@ -32,6 +31,10 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_external_game"
             android:theme="@style/FullscreenTheme" >
+        </activity>
+        <activity
+            android:name=".activities.ResumenJuegoActivity"
+            android:label="@string/title_activity_resumen_juego" >
         </activity>
     </application>
 

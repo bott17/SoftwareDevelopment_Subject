@@ -30,6 +30,7 @@ public class GameManager {
     private ArrayList<Pregunta> listaPreguntas;
     private int indiceJuego; // Indica la pregunta por la que va el jugador
     private int aciertosJugador;
+    private ArrayList<Integer> indexDeFallos;
 
 
     /**
@@ -75,6 +76,7 @@ public class GameManager {
         indiceJuego = 0;
         aciertosJugador = 0;
         listaPreguntas  = new ArrayList<>();
+        indexDeFallos = new ArrayList<>();
 
         // Variables comunes al tipo de juego
         int numeroPreguntas = -1;
@@ -148,6 +150,9 @@ public class GameManager {
         }
         else{
             // TODO pasar respuestas en vez de null
+
+            indexDeFallos.add(indiceJuego-1);
+
             EstadisticasManager.updateFallo(idPartida, pregunta, null);
         }
 
@@ -171,6 +176,17 @@ public class GameManager {
 
     public Pregunta getUltimaPregunta() {
         return listaPreguntas.get(indiceJuego-1);
+    }
+
+    public ArrayList<Pregunta> getPreguntasFallidas(){
+
+        ArrayList<Pregunta> preguntasFallidas = new ArrayList<>();
+
+        for(Integer index: indexDeFallos){
+            preguntasFallidas.add(listaPreguntas.get(index));
+        }
+
+        return preguntasFallidas;
     }
 
 }

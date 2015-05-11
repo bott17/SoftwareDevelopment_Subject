@@ -1,9 +1,11 @@
 package ds.practica2.juegopreguntas.activities;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +23,8 @@ import java.util.ArrayList;
 import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
+import ds.practica2.juegopreguntas.popups.PopupFallo;
+import ds.practica2.juegopreguntas.popups.PopupFinJuegoResumen;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaSonido;
 import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
@@ -47,6 +51,9 @@ public class LanzadorActivity extends MyActionBarActivity {
     private ImageView botonParar;
     private SeekBar seekBar;
     private ImageView foto1, foto2, foto3, foto4;
+
+    private PopupFallo popupFallo;
+    //private PopupFinJuegoResumen resumen;
 
 
     View.OnClickListener seleccionarRespuestaListener;
@@ -87,6 +94,26 @@ public class LanzadorActivity extends MyActionBarActivity {
     @Override
     protected void initComponents() {
 
+        // Creando el popup de de fallo
+        popupFallo = new PopupFallo(this, null);
+        View.OnClickListener continueGameListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupFallo.cerrarPopup();
+                cambiarPregunta();
+            }
+        };
+        View.OnClickListener finalizarJuegoListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupFallo.cerrarPopup();
+
+                rendirse();
+            }
+        };
+        popupFallo.setContinueListener(continueGameListener);
+        popupFallo.setFinalizarListener(finalizarJuegoListener);
+
         // Cargando los sonidos
         SonidoManager.load(getApplicationContext());
 
@@ -110,6 +137,12 @@ public class LanzadorActivity extends MyActionBarActivity {
         seleccionarRespuestaListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Para el sonido al cambiar de pregunta
+                if(SonidoManager.reproduciendo()) {
+                    Log.d(TAG, "parando sonido");
+                    SonidoManager.pararSonido();
+                }
 
                 ArrayList<Integer> respuestasSeleccionadas = new ArrayList<>();
 
@@ -140,19 +173,29 @@ public class LanzadorActivity extends MyActionBarActivity {
                     if(gameManager.validarPregunta(preguntaActual, respuestasSeleccionadas).first) {
                         Toast.makeText(getApplicationContext(), "¡Respuesta Correcta!", Toast.LENGTH_SHORT).show();
                         sonidoResultado(true);
+                        cambiarPregunta();
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "¡Respuesta Incorrecta!", Toast.LENGTH_SHORT).show();
                         sonidoResultado(false);
+
+                        // El popup lanza el cambio de pregunta si es necesario
+                        lanzarPopupFallo();
                     }
                 }
 
-                cambiarPregunta();
+
             }
         };
 
 
 
+
+    }
+
+    private void lanzarPopupFallo() {
+
+        popupFallo.showChargedPopup(new Point(0, 0));
 
     }
 
@@ -163,28 +206,79 @@ public class LanzadorActivity extends MyActionBarActivity {
 
     private void cambiarPregunta(){
 
-        // Para el sonido al cambiar de pregunta
-        if(SonidoManager.reproduciendo()) {
-            Log.d(TAG, "parando sonido");
-            SonidoManager.pararSonido();
-        }
-
         preguntaActual = gameManager.siguientePregunta();
 
         // Comprobación de que queden preguntas
         if(preguntaActual != null)
             obtenerDatosPregunta(preguntaActual);
         else {
-            finalizarJuego();
+            showPopupFinal(gameManager.getPreguntasFallidas());
         }
 
     }
 
     private void finalizarJuego() {
+
         gameManager.finJuego();
 
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
+    }
+
+    private void showPopupFinal(ArrayList<Pregunta> preguntasFallidas){
+
+        // Obtener titulo y respuesta correcta para todas las preguntas
+        ArrayList<Pair<String, String> > soluciones = new ArrayList<>();
+
+        for(Pregunta preguntaTemporal: preguntasFallidas) {
+            String respuestaCorrecta = preguntaTemporal.getRespuestaCorrecta();
+            Pair<String, String> solucion = new Pair<>(preguntaTemporal.getTituloPregunta(), respuestaCorrecta);
+            Log.d(TAG, solucion.first + " " + solucion.second);
+
+            soluciones.add(solucion);
+        }
+
+
+        // Lanzar el popup
+        final PopupFinJuegoResumen resumen = new PopupFinJuegoResumen(LanzadorActivity.this, null, soluciones);
+        resumen.showChargedPopup(new Point(0,0));
+        View.OnClickListener listenerPrincipal = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Cerrando respuestas...");
+                resumen.cerrarPopup();
+                finalizarJuego();
+            }
+        };
+        resumen.setPrincipalListener(listenerPrincipal);
+    }
+
+    private void rendirse(){
+        /*
+        // Lanzar popup de soluciones
+        String respuestaCorrecta = preguntaActual.getRespuestaCorrecta();
+        Pair<String, String> solucion = new Pair<>(preguntaActual.getTituloPregunta(), respuestaCorrecta);
+        Log.d(TAG, solucion.first + " " + solucion.second);
+        ArrayList<Pair<String, String> > soluciones = new ArrayList<>();
+        soluciones.add(solucion);
+        */
+
+        ArrayList<Pregunta> preguntaFallida = new ArrayList<>();
+        preguntaFallida.add(preguntaActual);
+        showPopupFinal(preguntaFallida);
+/*
+        resumen = new PopupFinJuegoResumen(LanzadorActivity.this, null, soluciones);
+        resumen.showChargedPopup(new Point(0,0));
+        View.OnClickListener listenerPrincipal = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Cerrando respuestas...");
+                resumen.cerrarPopup();
+                finalizarJuego();
+            }
+        };
+        resumen.setPrincipalListener(listenerPrincipal);
+        */
     }
 
     private void resumeGame() {
