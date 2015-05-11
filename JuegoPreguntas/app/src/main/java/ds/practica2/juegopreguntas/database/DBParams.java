@@ -8,7 +8,7 @@ public abstract class  DBParams {
     private static final String TABLE_NAME_ESTADISTICAS = "estadisticas";
 
 
-    protected static final String sqlGetPreguntas = "select titulo, idcategoria, respuesta, dificultad, correcta, recurso, tipopregunta from preguntas left JOIN respuestas on preguntas.rowid=idpregunta";
+    protected static final String sqlGetPreguntas = "select titulo, idcategoria, respuesta, dificultad, correcta, recurso, tipopregunta from preguntas left JOIN respuestas on id=idpregunta";
     protected static final String sqlGetIDJuego = "select count(*) from partidas";
     protected  static final String sqlGetNumAciertos = "select* from estadisticas where acierto=1";
     protected  static final String sqlGetNumFallos = "select* from estadisticas where acierto=0";
