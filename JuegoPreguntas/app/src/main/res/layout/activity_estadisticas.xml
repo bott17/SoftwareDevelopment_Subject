@@ -9,6 +9,17 @@
 
     <FrameLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="84dp"
+            android:layout_height="79dp"
+            android:id="@+id/bottonPrincipal"
+            android:background="@drawable/logo" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="35dp">
@@ -23,9 +34,9 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp">
 
         <FrameLayout
@@ -33,19 +44,17 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Numero de partidas"
-                android:id="@+id/textView3"
-                android:layout_alignTop="@+id/textView"
-                android:layout_alignParentStart="true" />
+            <ImageView
+                android:layout_width="87dp"
+                android:layout_height="87dp"
+                android:id="@+id/imageView2"
+                android:src="@drawable/partidas" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,88 +70,81 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Aciertos"
-                android:id="@+id/textView2"
-                android:layout_above="@+id/textViewTotalPartidas"
-                android:layout_alignEnd="@+id/textViewTotalAciertos" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="totalAciertos"
-                android:id="@+id/textViewTotalAciertos"
-                android:layout_alignTop="@+id/textViewTotalPartidas"
-                android:layout_centerHorizontal="true" />
-        </FrameLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Fallos"
-                android:id="@+id/textView"
-                android:layout_below="@+id/bottonPrincipal"
-                android:layout_alignParentEnd="true" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="totalFallos"
-                android:id="@+id/textViewTotalFallos"
-                android:layout_alignTop="@+id/textViewTotalAciertos"
-                android:layout_alignEnd="@+id/textView" />
-        </FrameLayout>
-    </LinearLayout>
-
-    <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center_horizontal">
 
-        <Button
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="principal"
-            android:id="@+id/bottonPrincipal"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
-    </FrameLayout>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:layout_width="47dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/acierto" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="#ffd9ffac">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="totalAciertos"
+                    android:id="@+id/textViewTotalAciertos"
+                    android:layout_alignTop="@+id/textViewTotalPartidas"
+                    android:layout_centerHorizontal="true" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp">
+
+                <ImageView
+                    android:layout_width="47dp"
+                    android:layout_height="45dp"
+                    android:id="@+id/imageView4"
+                    android:src="@drawable/error" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="#ffff865b">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="totalFallos"
+                    android:id="@+id/textViewTotalFallos"
+                    android:layout_alignTop="@+id/textViewTotalAciertos"
+                    android:layout_alignEnd="@+id/textView" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

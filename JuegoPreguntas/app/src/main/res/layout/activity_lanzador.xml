@@ -22,26 +22,51 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Principal"
+                    android:layout_width="84dp"
+                    android:layout_height="79dp"
                     android:id="@+id/bottonPrincipal"
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/textTituloPregunta" />
+                    android:background="@drawable/logo" />
             </FrameLayout>
 
-            <FrameLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="fill_parent">
 
-                <TextView
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="dificultad"
-                    android:id="@+id/textViewDificultad"
-                    android:layout_gravity="right" />
-            </FrameLayout>
+                    android:layout_gravity="right">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Te enftrentas a difcultad: "
+                            android:id="@+id/textView10" />
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:text="diff"
+                            android:id="@+id/textViewDificultad"
+                            android:layout_gravity="right" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
         <FrameLayout
