@@ -6,6 +6,7 @@ import android.util.Log;
 import android.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ds.practica2.juegopreguntas.database.DBAdapter;
 import ds.practica2.juegopreguntas.database.DBParams;
@@ -104,7 +105,16 @@ abstract  class InfoManager {
                 preguntas.add(PreguntaFactoria.makePreguntaImagenes(TipoPregunta.IMAGEN, title, idCategoria, listaRespuestas, dificultad));
             }
         }
-        return preguntas;
+
+        Collections.shuffle(preguntas);
+
+        ArrayList<Pregunta> seleccionPreguntas = new ArrayList<>();
+        for (int i=0; i<numeroPreguntas && i<preguntas.size(); i++){
+            seleccionPreguntas.add(preguntas.get(i));
+        }
+
+
+        return seleccionPreguntas;
     }
 
     public static void updateAcierto(int idPartida, TipoPregunta tipo, int categoria) {
