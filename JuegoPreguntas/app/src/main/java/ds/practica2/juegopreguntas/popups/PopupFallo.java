@@ -34,8 +34,7 @@ public class PopupFallo extends Popup {
     }
 
     @Override
-    public void showChargedPopup(Point p) {
-        super.showChargedPopup(p);
+    public void showChargedPopup(Point p) { super.showChargedPopup(p);
     }
 
 

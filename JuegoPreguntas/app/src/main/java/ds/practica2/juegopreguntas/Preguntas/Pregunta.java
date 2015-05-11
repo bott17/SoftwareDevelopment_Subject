@@ -73,7 +73,7 @@ public class Pregunta {
         return dificultad;
     }
 
-    public String getSolucion() {
+    public String getRespuestaCorrecta() {
         String solucion="";
         for(Pair<String, Integer> pair: respuestas){
             if(pair.second == 1){

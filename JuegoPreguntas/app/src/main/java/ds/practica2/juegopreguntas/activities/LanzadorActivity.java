@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 import ds.practica2.juegopreguntas.manejadores.SonidoManager;
 import ds.practica2.juegopreguntas.juego.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
-import ds.practica2.juegopreguntas.popups.Popup;
 import ds.practica2.juegopreguntas.popups.PopupFallo;
 import ds.practica2.juegopreguntas.popups.PopupFinJuegoResumen;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
@@ -56,7 +53,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     private ImageView foto1, foto2, foto3, foto4;
 
     private PopupFallo popupFallo;
-    private PopupFinJuegoResumen resumen;
+    //private PopupFinJuegoResumen resumen;
 
 
     View.OnClickListener seleccionarRespuestaListener;
@@ -200,7 +197,6 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         popupFallo.showChargedPopup(new Point(0, 0));
 
-
     }
 
     private void sonidoResultado(boolean acierto) {
@@ -216,26 +212,61 @@ public class LanzadorActivity extends MyActionBarActivity {
         if(preguntaActual != null)
             obtenerDatosPregunta(preguntaActual);
         else {
-            finalizarJuego();
+            showPopupFinal(gameManager.getPreguntasFallidas());
         }
 
     }
 
     private void finalizarJuego() {
+
         gameManager.finJuego();
 
         Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
     }
 
+    private void showPopupFinal(ArrayList<Pregunta> preguntasFallidas){
+
+        // Obtener titulo y respuesta correcta para todas las preguntas
+        ArrayList<Pair<String, String> > soluciones = new ArrayList<>();
+
+        for(Pregunta preguntaTemporal: preguntasFallidas) {
+            String respuestaCorrecta = preguntaTemporal.getRespuestaCorrecta();
+            Pair<String, String> solucion = new Pair<>(preguntaTemporal.getTituloPregunta(), respuestaCorrecta);
+            Log.d(TAG, solucion.first + " " + solucion.second);
+
+            soluciones.add(solucion);
+        }
+
+
+        // Lanzar el popup
+        final PopupFinJuegoResumen resumen = new PopupFinJuegoResumen(LanzadorActivity.this, null, soluciones);
+        resumen.showChargedPopup(new Point(0,0));
+        View.OnClickListener listenerPrincipal = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "Cerrando respuestas...");
+                resumen.cerrarPopup();
+                finalizarJuego();
+            }
+        };
+        resumen.setPrincipalListener(listenerPrincipal);
+    }
+
     private void rendirse(){
+        /*
         // Lanzar popup de soluciones
-        String respuestaCorrecta = preguntaActual.getSolucion();
+        String respuestaCorrecta = preguntaActual.getRespuestaCorrecta();
         Pair<String, String> solucion = new Pair<>(preguntaActual.getTituloPregunta(), respuestaCorrecta);
         Log.d(TAG, solucion.first + " " + solucion.second);
         ArrayList<Pair<String, String> > soluciones = new ArrayList<>();
         soluciones.add(solucion);
+        */
 
+        ArrayList<Pregunta> preguntaFallida = new ArrayList<>();
+        preguntaFallida.add(preguntaActual);
+        showPopupFinal(preguntaFallida);
+/*
         resumen = new PopupFinJuegoResumen(LanzadorActivity.this, null, soluciones);
         resumen.showChargedPopup(new Point(0,0));
         View.OnClickListener listenerPrincipal = new View.OnClickListener() {
@@ -247,6 +278,7 @@ public class LanzadorActivity extends MyActionBarActivity {
             }
         };
         resumen.setPrincipalListener(listenerPrincipal);
+        */
     }
 
     private void resumeGame() {
