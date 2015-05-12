@@ -152,7 +152,7 @@ public class LanzadorActivity extends MyActionBarActivity {
 
                 // En caso de multirespuesta
                 if(preguntaActual.getTipoRespuestas() == TipoRespuestas.MULTIPLE){
-                    // TODO Implentar. Se podria hacer en otro listener diferente
+                    // TODO Implentar. Sin implementar en esta version
                 }
                 // En caso de respuesta unica
                 else if(preguntaActual.getTipoRespuestas() == TipoRespuestas.SIMPLE){
@@ -305,8 +305,6 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         View viewPreguntas;
 
-
-        // TODO Switch con enums?
         if (preguntaActual.getTipo().equals(DEFAULT)) {
 
             viewPreguntas = LayoutInflater.from(getApplicationContext()).inflate(R.layout.pregunta_estandar, null, false);

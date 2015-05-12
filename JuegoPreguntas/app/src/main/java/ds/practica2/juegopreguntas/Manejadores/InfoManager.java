@@ -41,13 +41,12 @@ abstract  class InfoManager {
 
         if(preguntasCursor.moveToFirst()) {
 
-            // TODO Controlar el tipo de pregunta
 
             // Recuperar titulo
             String title= preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasTitulo()));
             int idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasIdcategoria()));
             int dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasDificultad()));
-            // TODO Añadir tipo mediante enums
+            // TODO Añadir tipo mediante enums. Deuda tecnica, necesario para mantenimiento
             int tipoPregunta = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasTipopregunta()));
             String recurso = preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getPreguntasRecurso()));
 
@@ -58,17 +57,15 @@ abstract  class InfoManager {
 
                 // Comprobacion: si el titulo cambia, crear pregunta e inicializar los campos de la pregunta
                 if( !title.equals(preguntasCursor.getString(preguntasCursor.getColumnIndex("titulo")))) {
-                    // TODO Utilizar el enum como selector
-                    // TODO utilizar swtich?
-                    if(tipoPregunta == 1) {
+                    if(tipoPregunta == 1) { // Tipo texto
                         preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, dificultad));
                     }
-                    else if (tipoPregunta == 3){
+                    else if (tipoPregunta == 3){ // Tipo sonido
 
                         int idResource = context.getResources().getIdentifier(recurso, "raw", context.getPackageName());
                         preguntas.add(PreguntaFactoria.makePreguntaSonido(TipoPregunta.SONIDO, title, idCategoria, listaRespuestas, idResource, dificultad));
                     }
-                    else if(tipoPregunta == 2){
+                    else if(tipoPregunta == 2){ // Tipo imagen
                         preguntas.add(PreguntaFactoria.makePreguntaImagenes(TipoPregunta.IMAGEN, title, idCategoria, listaRespuestas, dificultad));
                     }
 
@@ -84,15 +81,12 @@ abstract  class InfoManager {
                     listaRespuestas.add(new Pair<>(preguntasCursor.getString(preguntasCursor.getColumnIndex(DBParams.getRespuestasRespuesta())), preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getRespuestasCorrecta()))));
 
 
-                // TODO añadir categoria
                 idCategoria = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasIdcategoria()));
                 dificultad = preguntasCursor.getInt(preguntasCursor.getColumnIndex(DBParams.getPreguntasDificultad()));
 
             } while (preguntasCursor.moveToNext());
 
             // Crear la ultima pregunta, una vez el cursor ya ha finalizado
-            // TODO Utilizar el enum como selector
-            // TODO utilizar swtich?
             if(tipoPregunta == 1) {
                 preguntas.add(PreguntaFactoria.makePregunta(title, idCategoria, listaRespuestas, dificultad));
             }
@@ -137,7 +131,7 @@ abstract  class InfoManager {
 
     public static void addJuego(TipoJuego tipoJuego) {
 
-        // TODO aniadir tipo de juego
+        // TODO aniadir tipo de juego. No aplica a esta version
         mDbHelper.addJuego("NA");
     }
 

@@ -44,7 +44,6 @@ public class GameManager {
 
         //InfoManager.startDB(context);
 
-        // TODO recuperar id juego de la bd e incrementarlo
         idPartida = InfoManager.getIdJuego() + 1;
         Log.d(TAG, "Nº partidas anteriores: " + idPartida);
 
@@ -134,9 +133,9 @@ public class GameManager {
         boolean correcto = false;
         Pair<Boolean, ArrayList<Integer> > resultado = new Pair<>(false, indexSeleccionadas);
 
-        // TODO Implementar Multirespuesta
-        if(pregunta.getTipoRespuestas() == TipoRespuestas.MULTIPLE){
 
+        if(pregunta.getTipoRespuestas() == TipoRespuestas.MULTIPLE){
+            // TODO Implementar Multirespuesta. No aplica en esta version
         }
         else if(pregunta.getTipoRespuestas() == TipoRespuestas.SIMPLE) {
 
@@ -149,7 +148,7 @@ public class GameManager {
             EstadisticasManager.updateAcierto(idPartida, pregunta);
         }
         else{
-            // TODO pasar respuestas en vez de null
+            // TODO pasar respuestas en vez de null. No aplica en esta version
 
             indexDeFallos.add(indiceJuego-1);
 
