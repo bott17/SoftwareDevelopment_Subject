@@ -28,9 +28,6 @@ public class MainActivity extends MyActionBarActivity {
         initComponents();
         EstadisticasManager.startDB(getApplicationContext());
 
-
-        // TODO Eliminar
-        //testDB();
     }
 
     public void testDB(){

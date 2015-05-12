@@ -119,7 +119,7 @@ public class DBAdapter {
         {
             ContentValues estadisticas = new ContentValues();
             estadisticas.put(DBParams.getEstadisticasIdjuego(), idPartida);
-            estadisticas.put(DBParams.getEstadisticasIdcategoria(), categoria); // TODO Categoria no controlada
+            estadisticas.put(DBParams.getEstadisticasIdcategoria(), categoria);
             estadisticas.put(DBParams.getEstadisticasIdtipo(), 1);
             estadisticas.put(DBParams.getEstadisticasAcierto(), 1);
 
@@ -140,7 +140,7 @@ public class DBAdapter {
         {
             ContentValues estadisticas = new ContentValues();
             estadisticas.put(DBParams.getEstadisticasIdjuego(), idPartida);
-            estadisticas.put(DBParams.getEstadisticasIdcategoria(), categoria); // TODO Categoria no controlada
+            estadisticas.put(DBParams.getEstadisticasIdcategoria(), categoria);
             estadisticas.put(DBParams.getEstadisticasIdtipo(), 1);
             estadisticas.put(DBParams.getEstadisticasAcierto(), 0);
 
