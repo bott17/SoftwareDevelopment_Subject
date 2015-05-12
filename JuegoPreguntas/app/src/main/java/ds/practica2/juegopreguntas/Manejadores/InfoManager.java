@@ -10,10 +10,10 @@ import java.util.Collections;
 
 import ds.practica2.juegopreguntas.database.DBAdapter;
 import ds.practica2.juegopreguntas.database.DBParams;
-import ds.practica2.juegopreguntas.juego.TipoJuego;
+import ds.practica2.juegopreguntas.tipos.TipoJuego;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
 import ds.practica2.juegopreguntas.preguntas.PreguntaFactoria;
-import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
+import ds.practica2.juegopreguntas.tipos.TipoPregunta;
 
 /**
  * Created by bott1 on 14/04/2015.
