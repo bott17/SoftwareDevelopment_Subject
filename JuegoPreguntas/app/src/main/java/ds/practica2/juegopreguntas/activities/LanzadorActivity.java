@@ -21,6 +21,7 @@ import android.widget.ToggleButton;
 import java.util.ArrayList;
 
 import ds.practica2.juegopreguntas.R;
+import ds.practica2.juegopreguntas.tipos.TipoCategoria;
 import ds.practica2.juegopreguntas.tipos.TipoJuego;
 import ds.practica2.juegopreguntas.manejadores.GameManager;
 import ds.practica2.juegopreguntas.manejadores.SonidoManager;
@@ -51,6 +52,7 @@ public class LanzadorActivity extends MyActionBarActivity {
     private ImageView botonParar;
     private SeekBar seekBar;
     private ImageView foto1, foto2, foto3, foto4;
+    private TextView textoCategoria;
 
     private PopupFallo popupFallo;
     //private PopupFinJuegoResumen resumen;
@@ -116,6 +118,8 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         // Cargando los sonidos
         SonidoManager.load(getApplicationContext());
+
+        textoCategoria = (TextView)findViewById(R.id.textViewCategoria);
 
         gameManager = GameManager.getInstance(getApplicationContext(), TipoJuego.DEFAULT);
 
@@ -296,6 +300,8 @@ public class LanzadorActivity extends MyActionBarActivity {
 
         textTituloPregunta.setText(preguntaActual.getTituloPregunta());
         textDificultad.setText(Integer.toString(preguntaActual.getDificultad()));
+
+        textoCategoria.setText(TipoCategoria.toString(pregunta.getCategoria()));
 
         View viewPreguntas;
 

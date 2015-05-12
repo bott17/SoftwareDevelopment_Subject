@@ -5,7 +5,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="ds.practica2.juegopreguntas.activities.EstadisticasActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/juego_preguntas">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="totalpartidas:"
+                android:text="totalpartidas"
                 android:id="@+id/textViewTotalPartidas"
                 android:layout_below="@+id/textView3"
                 android:layout_alignEnd="@+id/bottonPrincipal" />
