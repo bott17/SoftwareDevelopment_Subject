@@ -5,6 +5,7 @@ import android.util.Pair;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import ds.practica2.juegopreguntas.tipos.TipoPregunta;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
 /**

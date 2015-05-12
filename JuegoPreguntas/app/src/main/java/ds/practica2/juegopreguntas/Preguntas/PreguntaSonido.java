@@ -4,6 +4,8 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 
+import ds.practica2.juegopreguntas.tipos.TipoPregunta;
+
 /**
  * Created by bott1 on 16/04/2015.
  */

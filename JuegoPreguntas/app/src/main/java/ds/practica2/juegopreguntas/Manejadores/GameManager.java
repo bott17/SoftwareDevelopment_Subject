@@ -6,9 +6,9 @@ import android.util.Pair;
 
 import java.util.ArrayList;
 
-import ds.practica2.juegopreguntas.juego.TipoJuego;
+import ds.practica2.juegopreguntas.tipos.TipoJuego;
 import ds.practica2.juegopreguntas.preguntas.Pregunta;
-import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
+import ds.practica2.juegopreguntas.tipos.TipoPregunta;
 import ds.practica2.juegopreguntas.tipos.TipoRespuestas;
 
 /**

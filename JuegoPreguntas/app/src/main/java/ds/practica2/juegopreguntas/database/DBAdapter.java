@@ -10,7 +10,7 @@ import android.util.Log;
 
 import java.io.IOException;
 
-import ds.practica2.juegopreguntas.preguntas.TipoPregunta;
+import ds.practica2.juegopreguntas.tipos.TipoPregunta;
 
 public class DBAdapter {
 
